@@ -1,3 +1,4 @@
+<?php include('php/server.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Loteria - Login</title>
+  <title>Loteria - registro</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,25 +40,29 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bem Vindo!</h1>
                   </div>
-                  <form class="user">
-                    <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Lembrar-me</label>
-                      </div>
-                    </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+	
+    <form class="user" method="post" action="register.php">
+        <div class="form-group">
+            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario" name="username" value="<?php echo $username; ?>">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="celular" name="celular" value="<?php echo $celular; ?>">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Senha" name="password_1">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Data" name="data">
+        </div>
+  
+  	<button type="submit" class="btn btn-primary btn-user btn-block" name="reg_user">Login</button>
+                    <p style="color:red !important;"> <?php include('php/errors.php'); ?></p>
                     <hr>
-                  </form>
-                </div>
+  	<p>
+  		Already a member? <a href="login.php">Sign in</a>
+  	</p>
+  </form>
+  </div>
               </div>
             </div>
           </div>

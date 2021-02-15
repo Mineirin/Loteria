@@ -1,3 +1,16 @@
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -31,7 +44,7 @@
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion no-print" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
       </div>
@@ -43,7 +56,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="index.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Painel Administrador</span></a>
     </li>
@@ -65,26 +78,26 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Painel de Usuários:</h6>
-          <a class="collapse-item" href="cambistas.html">Cambistas</a>
-          <a class="collapse-item" href="jogadores.html">Jogadores</a>
+          <a class="collapse-item" href="cambistas.php">Cambistas</a>
+          <a class="collapse-item" href="jogadores.php">Jogadores</a>
         </div>
       </div>
     </li>
 
      <!-- Nav Item - Charts -->
      <li class="nav-item">
-      <a class="nav-link" href="novosorteio.html">
+      <a class="nav-link" href="novosorteio.php">
         <i class="fas fa-fw fa-cube"></i>
         <span>Novo Sorteio</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="novaaposta.html">
+      <a class="nav-link" href="novaaposta.php">
         <i class="fas fa-fw fa-cube"></i>
         <span>Nova Aposta</span></a>
     </li>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-      <a class="nav-link" href="Sorteios.html">
+      <a class="nav-link" href="sorteios.php">
         <i class="fas fa-fw fa-cubes"></i>
         <span>Sorteios</span></a>
     </li>
@@ -239,134 +252,152 @@
                               <div class="card-body">
               
                                 <div class="row">
-                                  <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                  <div class="col-md-6 d-flex align-items-center justify-content-center formss" id="teste123">
               
                                     <div class="cartela ml-3">
-              
+                                      <form name='form1' method=post action='check.php'>
                                       <div class="d-flex justify-content-center">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(0)';>
                                           <label class="form-check-label" for="inlineCheckbox1">01</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(1)';>
                                           <label class="form-check-label" for="inlineCheckbox2">02</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(2)';>
                                           <label class="form-check-label" for="inlineCheckbox3">03</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(3)';>
                                           <label class="form-check-label" for="inlineCheckbox4">04</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(4)';>
                                           <label class="form-check-label" for="inlineCheckbox5">05</label>
                                         </div>
-                    
-                                      </div>
-                    
-                                      <div class="d-flex justify-content-center">
-                    
+
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(5)';>
                                           <label class="form-check-label" for="inlineCheckbox1">06</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(6)';>
                                           <label class="form-check-label" for="inlineCheckbox2">07</label>
                                         </div>
+                    
+                                      </div>
+                    
+                                      <div class="d-flex justify-content-center">
+                    
+                                        
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(7)';>
                                           <label class="form-check-label" for="inlineCheckbox3">08</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(8)';>
                                           <label class="form-check-label" for="inlineCheckbox4">09</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(9)';>
                                           <label class="form-check-label" for="inlineCheckbox5">10</label>
                                         </div>
-                    
-                                      </div>
-                    
-                                      <div class="d-flex justify-content-center">
-                    
+
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(10)';>
                                           <label class="form-check-label" for="inlineCheckbox1">11</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(11)';>
                                           <label class="form-check-label" for="inlineCheckbox2">12</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(12)';>
                                           <label class="form-check-label" for="inlineCheckbox3">13</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(13)';>
                                           <label class="form-check-label" for="inlineCheckbox4">14</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
-                                          <label class="form-check-label" for="inlineCheckbox5">15</label>
                                         </div>
                     
                                       </div>
                     
                                       <div class="d-flex justify-content-center">
                     
+                                        
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(14)';>
+                                          <label class="form-check-label" for="inlineCheckbox5">15</label>
+                                        </div>
+                                         <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(15)';>
                                           <label class="form-check-label" for="inlineCheckbox1">16</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(16)';>
                                           <label class="form-check-label" for="inlineCheckbox2">17</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(17)';>
                                           <label class="form-check-label" for="inlineCheckbox3">18</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(18)';>
                                           <label class="form-check-label" for="inlineCheckbox4">19</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(19)';>
                                           <label class="form-check-label" for="inlineCheckbox5">20</label>
+                                        </div>
+
+                                         <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(20)';>
+                                          <label class="form-check-label" for="inlineCheckbox5">21</label>
                                         </div>
                     
                                       </div>
+                    
+                                  
                     
                                       <div class="d-flex justify-content-center">
                     
+                                        
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                          <label class="form-check-label" for="inlineCheckbox1">21</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(21)';>
                                           <label class="form-check-label" for="inlineCheckbox2">22</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(22)';>
                                           <label class="form-check-label" for="inlineCheckbox3">23</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(23)';>
                                           <label class="form-check-label" for="inlineCheckbox4">24</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(24)';>
                                           <label class="form-check-label" for="inlineCheckbox5">25</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(25)';>
+                                          <label class="form-check-label" for="inlineCheckbox5">26</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(26)';>
+                                          <label class="form-check-label" for="inlineCheckbox5">27</label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(27)';>
+                                          <label class="form-check-label" for="inlineCheckbox5">28</label>
                                         </div>
                     
                                       </div>
-                  
+                                      </form>
                                     </div>
               
                                   </div>
@@ -377,7 +408,7 @@
               
                               </div>
                               <div class="card-footer text-center no-print">
-                                <a href="resultado.html" class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3">
+                                <a href="resultado.php" class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3">
                                   <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                   </span>
@@ -535,7 +566,7 @@
 
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Sair</a>
+          <a href="index.php?logout='1'" class="btn btn-primary">Sair</a>
         </div>
       </div>
     </div>
@@ -545,12 +576,47 @@
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+
+  <script>
+   function checkWindowSize() {  
+
+    if ( $(window).width() > 1150 ) {  
+      document.getElementById("teste123").classList.add('col-md-6');
+
+document.getElementById("teste123").classList.remove('col-md-12');
+       
+    }  
+    else {  
+      document.getElementById("teste123").classList.add('col-md-12');
+
+document.getElementById("teste123").classList.remove('col-md-6');
+        
+    }  
+
+}  
+
+$(window).resize(checkWindowSize);  
+  </script>
+
+  <script type="text/javascript">
+function chkcontrol(j) {
+var total=0;
+for(var i=0; i < document.form1.ckb.length; i++){
+if(document.form1.ckb[i].checked){
+total =total +1;}
+if(total > 5){
+alert("Selecione apenas 5 numeros") 
+document.form1.ckb[j].checked = false ;
+return false;
+}
+}
+} </script>
 
 </body>
 

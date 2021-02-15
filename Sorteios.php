@@ -1,3 +1,16 @@
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -9,7 +22,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Cambistas - Dashboard</title>
+  <title>Sorteios - Dashboard</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,7 +45,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion no-print" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -44,7 +57,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Painel Administrador</span></a>
       </li>
@@ -66,26 +79,26 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Painel de Usuários:</h6>
-            <a class="collapse-item" href="cambistas.html">Cambistas</a>
-            <a class="collapse-item" href="jogadores.html">Jogadores</a>
+            <a class="collapse-item" href="cambistas.php">Cambistas</a>
+            <a class="collapse-item" href="jogadores.php">Jogadores</a>
           </div>
         </div>
       </li>
 
        <!-- Nav Item - Charts -->
        <li class="nav-item">
-        <a class="nav-link" href="novaaposta.html">
+        <a class="nav-link" href="novaaposta.php">
           <i class="fas fa-fw fa-cube"></i>
           <span>Novo Sorteio</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="novaaposta.html">
+        <a class="nav-link" href="novaaposta.php">
           <i class="fas fa-fw fa-cube"></i>
           <span>Nova Aposta</span></a>
       </li>
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="Sorteios.html">
+        <a class="nav-link" href="sorteios.php">
           <i class="fas fa-fw fa-cubes"></i>
           <span>Sorteios</span></a>
       </li>
@@ -155,8 +168,8 @@
               </div>
             </li>
 
-              <!-- Nav Item - Alerts -->
-              <li class="nav-item dropdown no-arrow mx-1">
+               <!-- Nav Item - Alerts -->
+               <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-bell fa-fw"></i>
                   <!-- Counter - Alerts -->
@@ -231,78 +244,144 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Cambistas</h1>
+          <h1 class="h3 mb-2 text-gray-800">Sorteios</h1>
+
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Cambistas Cadastrados</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Sorteios Realizados</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nome</th>
-                      <th>Celular</th>
+                      <th>id</th>
+                      <th>Números</th>
                       <th>Data</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Nome</th>
-                      <th>Celular</th>
+                      <th>id</th>
+                      <th>Números</th>
                       <th>Data</th>
                     </tr>
                   </tfoot>
                   <tbody>
                     <tr>
-                      <td>Tiger Nixon</td>
-                      <td>(19)99999-9999</td>
+                      <td>1</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Garrett Winters</td>
-                      <td>(19)99999-9999</td>
+                      <td>2</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Ashton Cox</td>
-                      <td>(19)99999-9999</td>
+                      <td>3</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Cedric Kelly</td>
-                      <td>(19)99999-9999</td>
+                      <td>4</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Airi Satou</td>
-                      <td>(19)99999-9999</td>
+                      <td>5</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Brielle Williamson</td>
-                      <td>(19)99999-9999</td>
+                      <td>6</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Herrod Chandler</td>
-                      <td>(19)99999-9999</td>
+                      <td>7</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Rhona Davidson</td>
-                      <td>(19)99999-9999</td>
+                      <td>8</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Colleen Hurst</td>
-                      <td>(19)99999-9999</td>
-                      <td>2011/04/25</td>
+                      <td>9</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
                     </tr>
                     <tr>
-                      <td>Sonya Frost</td>
-                      <td>(19)99999-9999</td>
+                      <td>10</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>11</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>12</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>13</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>14</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>15</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>16</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>17</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>18</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>19</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>20</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>21</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>22</td>
+                      <td>01, 04, 13, 16, 23</td>
+                      <td>25/04/2021</td>
+                    </tr>
+                    <tr>
+                      <td>23</td>
+                      <td>01, 04, 13, 16, 23</td>
                       <td>25/04/2021</td>
                     </tr>
                   </tbody>
@@ -318,10 +397,10 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2020</span>
           </div>
         </div>
       </footer>
@@ -339,7 +418,6 @@
   </a>
 
   <!-- Logout Modal-->
-  
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -352,7 +430,7 @@
 
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Sair</a>
+          <a href="index.php?logout='1'" class="btn btn-primary">Sair</a>
         </div>
       </div>
     </div>

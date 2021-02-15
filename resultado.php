@@ -1,3 +1,16 @@
+<?php 
+  session_start(); 
+
+  if (!isset($_SESSION['username'])) {
+  	$_SESSION['msg'] = "You must log in first";
+  	header('location: login.php');
+  }
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['username']);
+  	header("location: login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -30,7 +43,7 @@
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion no-print" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
       <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
       </div>
@@ -42,7 +55,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="index.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Painel Administrador</span></a>
     </li>
@@ -64,26 +77,26 @@
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Painel de Usuários:</h6>
-          <a class="collapse-item" href="cambistas.html">Cambistas</a>
-          <a class="collapse-item" href="jogadores.html">Jogadores</a>
+          <a class="collapse-item" href="cambistas.php">Cambistas</a>
+          <a class="collapse-item" href="jogadores.php">Jogadores</a>
         </div>
       </div>
     </li>
 
      <!-- Nav Item - Charts -->
      <li class="nav-item">
-      <a class="nav-link" href="novaaposta.html">
+      <a class="nav-link" href="novaaposta.php">
         <i class="fas fa-fw fa-cube"></i>
         <span>Novo Sorteio</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="novaaposta.html">
+      <a class="nav-link" href="novaaposta.php">
         <i class="fas fa-fw fa-cube"></i>
         <span>Nova Aposta</span></a>
     </li>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-      <a class="nav-link" href="Sorteios.html">
+      <a class="nav-link" href="sorteios.php">
         <i class="fas fa-fw fa-cubes"></i>
         <span>Sorteios</span></a>
     </li>
@@ -297,7 +310,7 @@
                   
                 </div>
                 <div class="card-footer text-center">
-                  <a href="novaaposta.html" class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 mr-4">
+                  <a href="novaaposta.php" class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 mr-4">
                     <span class="icon text-white-50">
                       <i class="fas fa-plus"></i>
                     </span>
@@ -355,7 +368,7 @@
 
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Sair</a>
+          <a href="index.php?logout='1'" class="btn btn-primary">Sair</a>
         </div>
       </div>
     </div>

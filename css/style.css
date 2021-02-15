@@ -7,7 +7,7 @@
 }
 
 .form-check{
-    min-width: 65px;
+    min-width: 65px ;
     margin-bottom: 20px;
     margin-left: 0px;
     margin-right: 0px;
@@ -30,6 +30,15 @@
 .numeros .badge-pill{
     min-width: 55px;
     margin-bottom: 3px;
+}
+
+@media (max-width:1150px){
+    .imagem-novaaposta{
+        height:0;
+    }
+    .formss{
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 576px) { 
