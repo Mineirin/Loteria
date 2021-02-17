@@ -31,6 +31,7 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/print.css">
+  <link rel="stylesheet" href="css/cards-admin.css">
 
 </head>
 
@@ -192,12 +193,9 @@ echo(' <li class="nav-item">
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-         
-          
-
-        </div>
+        <?php
+          include_once('home.php');
+        ?>
         <!-- /.container-fluid -->
 
       </div>
@@ -207,7 +205,7 @@ echo(' <li class="nav-item">
       <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Mineirando-Software 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2021</span>
           </div>
         </div>
       </footer>
