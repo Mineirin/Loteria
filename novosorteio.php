@@ -32,7 +32,7 @@ include('php/server.php') ;
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Loteria - Dashboard</title>
+  <title>Sorteio Magnata</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -148,28 +148,28 @@ echo(' <li class="nav-item">
     </div>
 
   </ul>
-  <!-- End of Sidebar -->
-    <!-- End of Sidebar -->
+                            <!-- End of Sidebar -->
 
-    <!-- Content Wrapper -->
+                            <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
-      <!-- Main Content -->
+                            <!-- Main Content -->
       <div id="content">
 
-        <!-- Topbar -->
+                            <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
+          <div class="titulo">
+            <h1 class="h3 text-gray-800 text-center no-print">Sorteio Magnata</h1>
+          </div>
           <!-- Topbar Search -->
          
           <ul class="navbar-nav ml-auto">
           <div class="topbar-divider d-none d-sm-block"></div>
-
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -199,53 +199,69 @@ echo(' <li class="nav-item">
           <div class="row">
             <div class="col-12">
                             <!-- Inicio do Card -->
-                            <div class="card shadow mb-4 card-novaaposta mx-auto no-print">
-                              <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary text-center">Selecione os Numeros do Sorteio</h6>
-                              </div>
-                              <div class="card-body">
-              
-                                <div class="row">
-                                  <div class="col-md-6 d-flex align-items-center justify-content-center formss" id="teste123">
-              
-                                  <div id="form">
-                                    <form id="reg_sort" class="" method="post" action="novosorteio.php">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Nome do sorteio" name='nome'></br>
-                                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n1"/>
-          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
-          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>
-          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n4"/>
-          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/>
-                                                  </form>
+              <div class="card shadow mb-4 card-novaaposta mx-auto no-print">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary text-center">Selecione os Numeros do Sorteio</h6>
+                </div>
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-md-6 d-flex align-items-center justify-content-center formss" id="teste123">
+
+                    <div id="form">
+                      <form id="reg_sort" class="" method="post" action="novosorteio.php">
+                        <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Nome do sorteio" name='nome'></br>
+                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n1"/>
+                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
+                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>
+                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n4"/>
+                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/>
+                      </form>
               
               </div>
                         
-                                  </div>
-                                  <div class="col-md-6">
-                                    <img class="imagem-novaaposta img-fluid" alt="dinheiro" src="https://image.freepik.com/free-vector/abstract-illustration-stock-exchange-data_23-2148604352.jpg">
-                                  </div>
-                                  <p style="color:red !important;"> <?php include('php/errors.php'); ?></p>
-                                </div>
-              
-                              </div>
-                              <div class="card-footer text-center no-print">
-                                
-                                <div class="salvar">
-                                
-                                    <i class="fas fa-check icon"></i>
-                                  
-                                <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar Sorteio" name="reg_sort"/>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- / Fim do Card-->
+            </div>
+              <div class="col-md-6">
+                 <img class="imagem-novaaposta img-fluid" alt="dinheiro" src="https://image.freepik.com/free-vector/abstract-illustration-stock-exchange-data_23-2148604352.jpg">
+              </div>
+              <p style="color:red !important;"> <?php include('php/errors.php'); ?></p>
+            </div>
 
-                            <h1 class="h3 mb-4 text-gray-800 text-center">Ganhadores</h1>
+          </div>
+          <div class="card-footer text-center no-print">
+          
+            <div class="salvar">
+          
+              <i class="fas fa-check icon"></i>
+            
+              <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar Sorteio" name="reg_sort"/>
+            </div>
+          </div>
+        </div>
+      <!-- / Fim do Card-->
+      <div class="card shadow mb-4 card-novaaposta mx-auto">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary text-center">Confira quais números foram sorteados</h6>
+                </div>
+                <div class="card-body">
 
+                  
+                  <div class="row">
+                    <div class="col-md-12 numeros">
+                      <h2 class=" h4 text-center">Números Sorteados</h2>
+                      <div class="justify-content-center text-center col-md-12 numeros">
+                      <span class="badge badge-pill badge-primary p-3 text-lg">1</span>
+                      <span class="badge badge-pill badge-primary p-3 text-lg">2</span>
+                      <span class="badge badge-pill badge-primary p-3 text-lg">3</span>
+                      <span class="badge badge-pill badge-primary p-3 text-lg">4</span>
+                      <span class="badge badge-pill badge-primary p-3 text-lg">5</span>
+                    </div>
+                  </div>
+                </div>
                             <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
+                            <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 no-print">
             <h1 class="h3 mb-0 text-gray-800">      </h1>
             <button onclick="window.print()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm no-print"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</button>
@@ -255,7 +271,9 @@ echo(' <li class="nav-item">
             <h1 class="h3 mb-0 text-gray-800">Relatório Resumo dos Sorteios</h1>
             <button onclick="window.print()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm no-print"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</button>
           </div>
-                  
+          <div class="card-header">
+            <h6 class="h4 mb-1 text-gray-800 text-center">Ganhadores</h6>
+          </div>
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Lista de Sorteios</h6>
