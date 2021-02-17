@@ -115,7 +115,7 @@ echo('<li class="nav-item">
 
 
       <?php
-      if($_SESSION['tipo']=="0"|| $_SESSION['tipo']=="1"){
+      if($_SESSION['tipo']=="0"){
 echo(' <li class="nav-item">
 <a class="nav-link" href="novosorteio.php">
   <i class="fas fa-fw fa-cube"></i>
@@ -210,7 +210,7 @@ echo(' <li class="nav-item">
               
                                   <div id="form">
                                     <form id="reg_sort" class="" method="post" action="novosorteio.php">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario" name='nome'></br>
+                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Nome do sorteio" name='nome'></br>
                                         <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n1"/>
           <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
           <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>

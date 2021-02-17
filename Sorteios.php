@@ -108,7 +108,7 @@ echo('<li class="nav-item">
 
 
       <?php
-      if($_SESSION['tipo']=="0"|| $_SESSION['tipo']=="1"){
+      if($_SESSION['tipo']=="0"){
 echo(' <li class="nav-item">
 <a class="nav-link" href="novosorteio.php">
   <i class="fas fa-fw fa-cube"></i>
