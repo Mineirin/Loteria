@@ -244,20 +244,37 @@ echo(' <li class="nav-item">
                   <h6 class="m-0 font-weight-bold text-primary text-center">Confira quais números foram sorteados</h6>
                 </div>
                 <div class="card-body">
+                <?php 
+                  if (isset($_GET['idSort'])) {
+                    $idSort = $_GET['idSort'];
 
-                  
-                  <div class="row">
-                    <div class="col-md-12 numeros">
-                      <h2 class=" h4 text-center">Números Sorteados</h2>
-                      <div class="justify-content-center text-center col-md-12 numeros">
-                      <span class="badge badge-pill badge-primary p-3 text-lg">1</span>
-                      <span class="badge badge-pill badge-primary p-3 text-lg">2</span>
-                      <span class="badge badge-pill badge-primary p-3 text-lg">3</span>
-                      <span class="badge badge-pill badge-primary p-3 text-lg">4</span>
-                      <span class="badge badge-pill badge-primary p-3 text-lg">5</span>
+                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='. $idSort.'  LIMIT 1';
+                      //echo($user_check_query );
+                    $result1 = mysqli_query($db, $user_check_query);
+
+                    
+                    
+                    $user = mysqli_fetch_assoc($result1);
+                    $num =  $user['numeros'];
+                    $arr1 = str_split($num);
+                    echo("
+                    <div class='row'>
+                    <div class='col-md-12 numeros'>
+                      <h2 class=' h4 text-center'>Números Sorteados</h2>
+                      <div class='justify-content-center text-center col-md-12 numeros'>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[0].$arr1[1]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[4].$arr1[5]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[8].$arr1[9]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[12].$arr1[13]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[16].$arr1[17]."</span>
                     </div>
                   </div>
                 </div>
+                    ");
+                  }
+                  ?>
+                  
+                  
                             <!-- Begin Page Content -->
         <div class="container-fluid">
 

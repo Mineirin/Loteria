@@ -245,7 +245,8 @@ if (isset($_POST['reg_sort'])) {
 
 
 
-    $user_check_query = 'SELECT idsorteio FROM sorteio WHERE nome="'. $nome.'"  LIMIT 1';
+    $user_check_query = 'SELECT idsorteio FROM sorteio WHERE nome="'. $nome.'"  ORDER BY idsorteio DESC
+    LIMIT 1';
 
     $result1 = mysqli_query($db, $user_check_query);
     $user = mysqli_fetch_assoc($result1);
