@@ -15,7 +15,105 @@ if (isset($_POST['reg_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $celular = mysqli_real_escape_string($db, $_POST['celular']);
   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-  $data = mysqli_real_escape_string($db, $_POST['data']);
+
+  $tipo = mysqli_real_escape_string($db, '2');
+
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($username)) { array_push($errors, "Username is required"); }
+  if (empty($celular)) { array_push($errors, "Celular is required"); }
+  if (empty($password_1)) { array_push($errors, "Password is required"); }
+
+
+  // first check the database to make sure 
+  // a user does not already exist with the same username and/or email
+  $user_check_query = "SELECT * FROM user WHERE name='$username'  LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+  
+  if ($user) { // if user exists
+    if ($user['name'] === $username) {
+      array_push($errors, "Username already exists");
+    }
+
+    
+  }
+
+  // Finally, register user if there are no errors in the form
+  if (count($errors) == 0) {
+  	$password = md5($password_1);//encrypt the password before saving in the database
+
+  	$query = "INSERT INTO user (name, celular, idSuperior, senha, tipo) 
+  			  VALUES('$username', '$celular','', '$password','$tipo')";
+  	mysqli_query($db, $query);
+
+
+    $user_check_query = "SELECT iduser FROM user WHERE name='$username'  LIMIT 1";
+    $result1 = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result1);
+  $idCriador =  $user['iduser'];
+  $tipo =  $user['tipo'];
+
+
+  	header('location: jogadores.php');
+  }
+}
+
+if (isset($_POST['reg_camb'])) {
+  // receive all input values from the form
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $celular = mysqli_real_escape_string($db, $_POST['celular']);
+  $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+
+  $tipo = mysqli_real_escape_string($db, '1');
+
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($username)) { array_push($errors, "Username is required"); }
+  if (empty($celular)) { array_push($errors, "Celular is required"); }
+  if (empty($password_1)) { array_push($errors, "Password is required"); }
+
+
+  // first check the database to make sure 
+  // a user does not already exist with the same username and/or email
+  $user_check_query = "SELECT * FROM user WHERE name='$username'  LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+  
+  if ($user) { // if user exists
+    if ($user['name'] === $username) {
+      array_push($errors, "Username already exists");
+    }
+
+    
+  }
+
+  // Finally, register user if there are no errors in the form
+  if (count($errors) == 0) {
+  	$password = md5($password_1);//encrypt the password before saving in the database
+
+  	$query = "INSERT INTO user (name, celular, idSuperior, senha, tipo) 
+  			  VALUES('$username', '$celular','', '$password','$tipo')";
+  	mysqli_query($db, $query);
+
+
+    $user_check_query = "SELECT iduser FROM user WHERE name='$username'  LIMIT 1";
+    $result1 = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result1);
+  $idCriador =  $user['iduser'];
+  $tipo =  $user['tipo'];
+
+
+  	header('location: cambistas.php');
+  }
+}
+
+if (isset($_POST['reg_adm'])) {
+  // receive all input values from the form
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $celular = mysqli_real_escape_string($db, $_POST['celular']);
+  $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+
   $tipo = mysqli_real_escape_string($db, '0');
 
   // form validation: ensure that the form is correctly filled ...
@@ -43,11 +141,18 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO user (name, celular, data, senha, tipo) 
-  			  VALUES('$username', '$celular','$data', '$password','$tipo')";
+  	$query = "INSERT INTO user (name, celular, idSuperior, senha, tipo) 
+  			  VALUES('$username', '$celular','', '$password','$tipo')";
   	mysqli_query($db, $query);
-  	$_SESSION['username'] = $username;
-  	$_SESSION['success'] = "You are now logged in";
+
+
+    $user_check_query = "SELECT iduser FROM user WHERE name='$username'  LIMIT 1";
+    $result1 = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result1);
+  $idCriador =  $user['iduser'];
+  $tipo =  $user['tipo'];
+
+
   	header('location: index.php');
   }
 }
@@ -69,6 +174,12 @@ if (isset($_POST['login_user'])) {
   	$query = "SELECT * FROM user WHERE name='$username' AND senha='$password'";
   	$results = mysqli_query($db, $query);
   	if (mysqli_num_rows($results) == 1) {
+      $user = mysqli_fetch_assoc($results);
+  $idCriador =  $user['iduser'];
+  $tipo =  $user['tipo'];
+
+	$_SESSION['id'] = $idCriador;
+  $_SESSION['tipo'] = $tipo;
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
   	  header('location: index.php');
@@ -76,6 +187,157 @@ if (isset($_POST['login_user'])) {
   		array_push($errors, "Usuario ou senha incorreta");
   	}
   }
+}
+
+
+
+
+if (isset($_POST['reg_sort'])) {
+  $n1 = mysqli_real_escape_string($db, $_POST['n1']);
+  $n2 = mysqli_real_escape_string($db, $_POST['n2']);
+  $n3 = mysqli_real_escape_string($db, $_POST['n3']);
+  $n4 = mysqli_real_escape_string($db, $_POST['n4']);
+  $n5 = mysqli_real_escape_string($db, $_POST['n5']);
+  $nome = mysqli_real_escape_string($db, $_POST['nome']);
+
+
+
+
+
+
+    // form validation: ensure that the form is correctly filled ...
+    // by adding (array_push()) corresponding error unto $errors array
+    if (empty($n1)) { array_push($errors, "Primeiro numero faltando"); }
+    if (empty($n2)) { array_push($errors, "Segundo numero faltando"); }
+    if (empty($n3)) { array_push($errors, "Terceiro numero faltando"); }
+    if (empty($n4)) { array_push($errors, "Quarto numero faltando"); }
+    if (empty($n5)) { array_push($errors, "Quinto numero faltando"); }
+    if (empty($nome)) { array_push($errors, "Nome faltando"); }
+
+
+
+    if (strlen($n1)==1) { $n1 = "0$n1"; }
+    if (strlen($n2)==1) { $n2 = "0$n2"; }
+    if (strlen($n3)==1) { $n3 = "0$n3"; }
+    if (strlen($n4)==1) { $n4 = "0$n4"; }
+    if (strlen($n5)==1) { $n5 = "0$n5"; }
+
+
+    // Finally, register user if there are no errors in the form
+    if (count($errors) == 0) {
+        
+    $user_check_query = 'SELECT iduser FROM user WHERE name="'. $_SESSION['username'].'"  LIMIT 1';
+
+    $result1 = mysqli_query($db, $user_check_query);
+    $user = mysqli_fetch_assoc($result1);
+    $idCriador =  $user['iduser'];
+
+
+  
+    $data = date("d/m/Y");
+    $array = array($n1, $n2, $n3, $n4, $n5);
+    sort($array);
+    $numeros = "$array[0], $array[1], $array[2], $array[3], $array[4]";
+
+    $query = "INSERT INTO sorteio (data, numeros, nome, idCriador) 
+          VALUES('$data', '$numeros','$nome', '$idCriador')";
+    mysqli_query($db, $query);
+
+
+
+    $user_check_query = 'SELECT idsorteio FROM sorteio WHERE nome="'. $nome.'"  LIMIT 1';
+
+    $result1 = mysqli_query($db, $user_check_query);
+    $user = mysqli_fetch_assoc($result1);
+    $idsorteio =  $user['idsorteio'];
+
+
+    $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio="0" ';
+    $result2 = mysqli_query($db,$sort_check_query);
+    while($row = $result2->fetch_assoc()) {
+      
+      
+
+    $sql = "UPDATE apostas SET idSorteio={$idsorteio} WHERE idapostas={$row['idapostas']}";
+
+    mysqli_query($db, $sql);
+
+
+      /*$result1 = mysqli_query($db, $user_check_query);
+      $user = mysqli_fetch_assoc($result1);
+      $idCriador =  $user['name'];*/
+    }
+
+    header('location: novosorteio.php?idSort="'.$idsorteio.'"');
+    }
+}
+
+
+
+if (isset($_POST['reg_apost'])) {
+  $n1 = mysqli_real_escape_string($db, $_POST['n1']);
+  $n2 = mysqli_real_escape_string($db, $_POST['n2']);
+  $n3 = mysqli_real_escape_string($db, $_POST['n3']);
+  $n4 = mysqli_real_escape_string($db, $_POST['n4']);
+  $n5 = mysqli_real_escape_string($db, $_POST['n5']);
+
+
+
+
+
+
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($n1)) { array_push($errors, "Primeiro numero faltando"); }
+  if (empty($n2)) { array_push($errors, "Segundo numero faltando"); }
+  if (empty($n3)) { array_push($errors, "Terceiro numero faltando"); }
+  if (empty($n4)) { array_push($errors, "Quarto numero faltando"); }
+  if (empty($n5)) { array_push($errors, "Quinto numero faltando"); }
+
+  if (strlen($n1)==1) { $n1 = "0$n1"; }
+  if (strlen($n2)==1) { $n2 = "0$n2"; }
+  if (strlen($n3)==1) { $n3 = "0$n3"; }
+  if (strlen($n4)==1) { $n4 = "0$n4"; }
+  if (strlen($n5)==1) { $n5 = "0$n5"; }
+
+
+
+
+
+    // Finally, register user if there are no errors in the form
+    if (count($errors) == 0) {
+        
+    $idUser = $_SESSION['id'];
+
+
+  
+
+  $array = array($n1, $n2, $n3, $n4, $n5);
+  sort($array);
+  $numeros = "$array[0], $array[1], $array[2], $array[3], $array[4]";
+
+    $query = "INSERT INTO apostas ( numeros, idUser) 
+          VALUES( '$numeros','$idUser')";
+    mysqli_query($db, $query);
+
+
+
+    
+
+    header('location: index.php');
+    }
+}
+
+
+if (isset($_POST['exc_camb'])) {
+  $idDelet = mysqli_real_escape_string($db, $_POST['idDelet']);
+  $sql = "DELETE FROM user WHERE iduser=$idDelet";
+  //echo($idDelet);
+
+  mysqli_query($db, $sql);
+
+
+    header('location: cambistas.php');
 }
 
 ?>

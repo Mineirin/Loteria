@@ -11,8 +11,17 @@ include('php/server.php') ;
   	header("location: login.php");
   }
 
-  $sort_check_query = 'SELECT * FROM sorteio  ';
+  if (isset($_GET['idsort'])) {
+  	$idSort = $_GET['idsort'];
+  }else{
+    header("location: index.php");
+  }
+
+  $sort_check_query = 'SELECT * FROM sorteio  WHERE idsorteio = '.$idSort.' LIMIT 1';
   $result = mysqli_query($db,$sort_check_query);
+  $user = mysqli_fetch_assoc($result);
+    $numeros =  $user['numeros'];
+    echo($numeros);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -195,7 +204,7 @@ echo(' <li class="nav-item">
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Sorteios Realizados</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Ganhadores</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -204,44 +213,99 @@ echo(' <li class="nav-item">
                     <tr>
                       <th>id</th>
                       <th>Números</th>
-                      <th>Data</th>
-                      <th>Ação</th>
+                      <th>Celular</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>id</th>
                       <th>Números</th>
-                      <th>Data</th>
-                      <th>Ação</th>
+                      <th>Celular</th>
                     </tr>
                   </tfoot>
                   <tbody>
                   <?php 
                   $cont =0;
-                   while($row = $result->fetch_assoc()) {
-                    echo("<tr>
-                    <td>".$row['nome']."</td>
-                    <td>".$row['numeros']."</td>
-                    <td>".$row['data']."</td>
-                    <td style='    padding: 0;
-                    margin: 0;
-                    display: flex;
-                    justify-content: center;'> 
-                  <a class='btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar'  
-                  href='ganhadores.php?idsort=".$row['idsorteio']."'
-                  style=' 
-                  background-color: lightgreen;
-                  color: black;
-                  width: 32%;
-                  margin: 10px;
-                  height: 100%;'>Ver ganhadores
-                  </a>
-                  </td>
-                  </tr>");
+
+                  $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort.' AND numeros ="'.$numeros.'"  ';
+
+                  $result12 = mysqli_query($db,$sort_check_query);
+                  
+                  while($row = $result12->fetch_assoc()) {
+                    $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
+
+                    $result1 = mysqli_query($db, $user_check_query);
+                    $user = mysqli_fetch_assoc($result1);
+                    $idCriador =  $user['name'];
+                    $numero = $user['celular'];
+
+                    echo("
+                    <tr>
+                      <td>".$idCriador."</td>
+                      <td>".$row['numeros']."</td>
+                      <td>".$numero."</td>
+                      <td></td>
+                    </tr>
                     
-                    $cont +=1;
-                   }
+                    ");
+                    
+                 }
+                  
+                  ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Todos</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>Números</th>
+                      <th>Celular</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>id</th>
+                      <th>Números</th>
+                      <th>Celular</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                  <?php 
+                  $cont =0;
+
+                  $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort.'  ';
+
+                  $result12 = mysqli_query($db,$sort_check_query);
+                  
+                  while($row = $result12->fetch_assoc()) {
+                    $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
+
+                    $result1 = mysqli_query($db, $user_check_query);
+                    $user = mysqli_fetch_assoc($result1);
+                    $idCriador =  $user['name'];
+                    $numero = $user['celular'];
+
+                    echo("
+                    <tr>
+                      <td>".$idCriador."</td>
+                      <td>".$row['numeros']."</td>
+                      <td>".$numero."</td>
+                      <td></td>
+                    </tr>
+                    
+                    ");
+                    
+                 }
                   
                   ?>
                   </tbody>

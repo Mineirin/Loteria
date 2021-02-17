@@ -38,10 +38,10 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Registrar Usuario</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Registrar ADM</h1>
                   </div>
 	
-    <form class="user" method="post" action="register.php">
+    <form class="user" method="post" action="registeradm.php">
         <div class="form-group">
             <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario" name="username" value="<?php echo $username; ?>">
         </div>
@@ -51,9 +51,9 @@
         <div class="form-group">
             <input type="password" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Senha" name="password_1">
         </div>
-        
+       
   
-  	<button type="submit" class="btn btn-primary btn-user btn-block" name="reg_user">Criar</button>
+  	<button type="submit" class="btn btn-primary btn-user btn-block" name="reg_adm">Criar</button>
                     <p style="color:red !important;"> <?php include('php/errors.php'); ?></p>
                     <hr>
   

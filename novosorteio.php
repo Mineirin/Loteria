@@ -1,5 +1,6 @@
 <?php 
-  session_start(); 
+include('php/server.php') ;
+
 
   if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -10,7 +11,16 @@
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
+
+  if (isset($_GET['idSort'])) {
+  	$idSort = $_GET['idSort'];
+  }
+
+  $sort_check_query = "SELECT * FROM sorteio ";
+  $result = mysqli_query($db,$sort_check_query);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -32,6 +42,7 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/print.css">
+  <link rel="stylesheet" href="css/stylesorteio.css">
 
 </head>
 
@@ -56,40 +67,63 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-      <a class="nav-link" href="index.php">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Painel Administrador</span></a>
-    </li>
+      <?php
+      if($_SESSION['tipo']=="0"){
+echo('<a class="nav-link" href="index.php">
+<i class="fas fa-fw fa-tachometer-alt"></i>
+<span>Painel Administrador</span></a>');
+      }
+      
+      ?>
+        
+      </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+      <!-- Divider -->
+      <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Menu Principal
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-user"></i>
-        <span>Usuários</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Painel de Usuários:</h6>
-          <a class="collapse-item" href="cambistas.php">Cambistas</a>
-          <a class="collapse-item" href="jogadores.php">Jogadores</a>
-        </div>
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Menu Principal
       </div>
-    </li>
 
-     <!-- Nav Item - Charts -->
-     <li class="nav-item">
-      <a class="nav-link" href="novosorteio.php">
-        <i class="fas fa-fw fa-cube"></i>
-        <span>Novo Sorteio</span></a>
-    </li>
+      <!-- Nav Item - Pages Collapse Menu -->
+      
+        
+
+        <?php
+      if($_SESSION['tipo']=="0"|| $_SESSION['tipo']=="1"){
+echo('<li class="nav-item">
+<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+  <i class="fas fa-fw fa-user"></i>
+  <span>Usuários</span>
+</a>
+<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+<div class="bg-white py-2 collapse-inner rounded">
+  <h6 class="collapse-header">Painel de Usuários:</h6>');
+  if($_SESSION['tipo']=="0"){
+  echo(' <a class="collapse-item" href="cambistas.php">Cambistas</a>');}
+  echo('<a class="collapse-item" href="jogadores.php">Jogadores</a>
+</div>
+</div></li>');
+      }
+      
+      ?>
+      
+
+       <!-- Nav Item - Charts -->
+      
+
+
+      <?php
+      if($_SESSION['tipo']=="0"|| $_SESSION['tipo']=="1"){
+echo(' <li class="nav-item">
+<a class="nav-link" href="novosorteio.php">
+  <i class="fas fa-fw fa-cube"></i>
+  <span>Novo Sorteio</span></a>
+</li>');
+      }
+      
+      ?>
     <li class="nav-item">
       <a class="nav-link" href="novaaposta.php">
         <i class="fas fa-fw fa-cube"></i>
@@ -132,99 +166,19 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
-          <!-- Topbar Navbar -->
+         
           <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-           <!-- Nav Item - Alerts -->
-           <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-bell fa-fw"></i>
-              <!-- Counter - Alerts -->
-              <span class="badge badge-danger badge-counter">1+</span>
-            </a>
-            <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-              <h6 class="dropdown-header">
-                Alertas
-              </h6>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <div class="mr-3">
-                  <div class="icon-circle bg-primary">
-                    <i class="fas fa-file-alt text-white"></i>
-                  </div>
-                </div>
-                <div>
-                  <div class="small text-gray-500">Hoje</div>
-                  <span class="font-weight-bold">Seja Bem Vindo!!</span>
-                </div>
-              </a>
-              
-              <a class="dropdown-item text-center small text-gray-500" href="#">Todas Alertas</a>
-            </div>
-          </li>
-
-          <!-- Nav Item - Messages -->
-          <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-envelope fa-fw"></i>
-              <!-- Counter - Messages -->
-              <!--<span class="badge badge-danger badge-counter">7</span> -->
-            </a>
-            <!-- Dropdown - Messages -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-              <h6 class="dropdown-header">
-                Mensagens
-              </h6>
-
-              <a class="dropdown-item text-center small text-gray-500" href="#">Ler mais Messages</a>
-            </div>
-          </li>
-
           <div class="topbar-divider d-none d-sm-block"></div>
 
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username']; ?></span>
               <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Perfil
-              </a>
+             
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -254,166 +208,34 @@
                                 <div class="row">
                                   <div class="col-md-6 d-flex align-items-center justify-content-center formss" id="teste123">
               
-                                    <div class="cartela ml-3">
-                                      <form name='form1' method=post action='check.php'>
-                                      <div class="d-flex justify-content-center">
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(0)';>
-                                          <label class="form-check-label" for="inlineCheckbox1">01</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(1)';>
-                                          <label class="form-check-label" for="inlineCheckbox2">02</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(2)';>
-                                          <label class="form-check-label" for="inlineCheckbox3">03</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(3)';>
-                                          <label class="form-check-label" for="inlineCheckbox4">04</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(4)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">05</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(5)';>
-                                          <label class="form-check-label" for="inlineCheckbox1">06</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(6)';>
-                                          <label class="form-check-label" for="inlineCheckbox2">07</label>
-                                        </div>
-                    
-                                      </div>
-                    
-                                      <div class="d-flex justify-content-center">
-                    
-                                        
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(7)';>
-                                          <label class="form-check-label" for="inlineCheckbox3">08</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(8)';>
-                                          <label class="form-check-label" for="inlineCheckbox4">09</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(9)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">10</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(10)';>
-                                          <label class="form-check-label" for="inlineCheckbox1">11</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(11)';>
-                                          <label class="form-check-label" for="inlineCheckbox2">12</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(12)';>
-                                          <label class="form-check-label" for="inlineCheckbox3">13</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(13)';>
-                                          <label class="form-check-label" for="inlineCheckbox4">14</label>
-                                        </div>
-                    
-                                      </div>
-                    
-                                      <div class="d-flex justify-content-center">
-                    
-                                        
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(14)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">15</label>
-                                        </div>
-                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option2" name="ckb" onclick='chkcontrol(15)';>
-                                          <label class="form-check-label" for="inlineCheckbox1">16</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(16)';>
-                                          <label class="form-check-label" for="inlineCheckbox2">17</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(17)';>
-                                          <label class="form-check-label" for="inlineCheckbox3">18</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(18)';>
-                                          <label class="form-check-label" for="inlineCheckbox4">19</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(19)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">20</label>
-                                        </div>
-
-                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(20)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">21</label>
-                                        </div>
-                    
-                                      </div>
-                    
-                                  
-                    
-                                      <div class="d-flex justify-content-center">
-                    
-                                        
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" name="ckb" onclick='chkcontrol(21)';>
-                                          <label class="form-check-label" for="inlineCheckbox2">22</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2" name="ckb" onclick='chkcontrol(22)';>
-                                          <label class="form-check-label" for="inlineCheckbox3">23</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2" name="ckb" onclick='chkcontrol(23)';>
-                                          <label class="form-check-label" for="inlineCheckbox4">24</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(24)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">25</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(25)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">26</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(26)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">27</label>
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option2" name="ckb" onclick='chkcontrol(27)';>
-                                          <label class="form-check-label" for="inlineCheckbox5">28</label>
-                                        </div>
-                    
-                                      </div>
-                                      </form>
-                                    </div>
+                                  <div id="form">
+                                    <form id="reg_sort" class="" method="post" action="novosorteio.php">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario" name='nome'></br>
+                                        <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n1"/>
+          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
+          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>
+          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n4"/>
+          <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/>
+                                                  </form>
               
+              </div>
+                        
                                   </div>
                                   <div class="col-md-6">
                                     <img class="imagem-novaaposta img-fluid" alt="dinheiro" src="https://image.freepik.com/free-vector/abstract-illustration-stock-exchange-data_23-2148604352.jpg">
                                   </div>
+                                  <p style="color:red !important;"> <?php include('php/errors.php'); ?></p>
                                 </div>
               
                               </div>
                               <div class="card-footer text-center no-print">
-                                <a href="resultado.php" class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3">
-                                  <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                  </span>
-                                  <span class="text">Salvar Sorteio</span>
-                                </a>
+                                
+                                <div class="salvar">
+                                
+                                    <i class="fas fa-check icon"></i>
+                                  
+                                <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar Sorteio" name="reg_sort"/>
+                                </div>
                               </div>
                             </div>
                             <!-- / Fim do Card-->
@@ -436,88 +258,67 @@
                   
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Ganhadores do Sorteio</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Lista de Sorteios</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Nome</th>
-                      <th>Numero</th>
+                    <th>Nome</th>
+                      <th>Numeros</th>
                       <th>Celular</th>
-                      <th>Colocação</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>Nome</th>
-                      <th>Numero</th>
+                      <th>Numeros</th>
                       <th>Celular</th>
-                      <th>Colocação</th>
                     </tr>
                   </tfoot>
                   <tbody>
+                  <?php 
+                  if (isset($_GET['idSort'])) {
+                    $idSort = $_GET['idSort'];
+
+                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='. $idSort.'  LIMIT 1';
+                      //echo($user_check_query );
+                    $result1 = mysqli_query($db, $user_check_query);
+
+                    
+                    
+                    $user = mysqli_fetch_assoc($result1);
+                    $num =  $user['numeros'];
+                 
+                    $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort.' AND numeros ="'.$num.'"  ';
+
+                    $result12 = mysqli_query($db,$sort_check_query);
+
+                    
+                  while($row = $result12->fetch_assoc()) {
+                    $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
+
+                    $result1 = mysqli_query($db, $user_check_query);
+                    $user = mysqli_fetch_assoc($result1);
+                    $idCriador =  $user['name'];
+                    $numero = $user['celular'];
+
+                    echo("
                     <tr>
-                      <td>Tiger Nixon</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>1</td>
+                      <td>".$idCriador."</td>
+                      <td>".$row['numeros']."</td>
+                      
+                      <td>".$numero."</td>
+                      
                     </tr>
-                    <tr>
-                      <td>Garrett Winters</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>2</td>
-                    </tr>
-                    <tr>
-                      <td>Ashton Cox</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>3</td>
-                    </tr>
-                    <tr>
-                      <td>Cedric Kelly</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>4</td>
-                    </tr>
-                    <tr>
-                      <td>Airi Satou</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>5</td>
-                    </tr>
-                    <tr>
-                      <td>Brielle Williamson</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>6</td>
-                    </tr>
-                    <tr>
-                      <td>Herrod Chandler</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>7</td>
-                    </tr>
-                    <tr>
-                      <td>Rhona Davidson</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>8</td>
-                    </tr>
-                    <tr>
-                      <td>Colleen Hurst</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>9</td>
-                    </tr>
-                    <tr>
-                      <td>Sonya Frost</td>
-                      <td>01, 04, 13, 16, 23</td>
-                      <td>(19)99999-9999</td>
-                      <td>10</td>
-                    </tr>
+                    
+                    ");
+                    
+                 }
+                   }
+                  ?>
+                    
                   </tbody>
                 </table>
               </div>
@@ -617,6 +418,56 @@ return false;
 }
 }
 } </script>
+
+<script type="text/javascript">
+
+$(function() {
+  'use strict';
+
+  var body = $('body');
+
+  function goToNextInput(e) {
+    var key = e.which,
+      t = $(e.target),
+      sib = t.next('input.sorteio');
+
+    if (key != 9 && (key < 48 || key > 57)) {
+      e.preventDefault();
+      return false;
+    }
+
+    if (key === 9) {
+      return true;
+    }
+
+    if (!sib || !sib.length) {
+      sib = body.find('input.sorteio').eq(0);
+    }
+    sib.select().focus();
+  }
+
+  function onKeyDown(e) {
+    var key = e.which;
+
+    if (key === 9 || (key >= 48 && key <= 57)) {
+      return true;
+    }
+
+    e.preventDefault();
+    return false;
+  }
+  
+  function onFocus(e) {
+    $(e.target).select();
+  }
+
+  //body.on('keyup', 'input', goToNextInput);
+  //body.on('keydown', 'input.teste', onKeyDown);
+  body.on('click', 'input.teste', onFocus);
+
+})
+
+</script>
 
 </body>
 
