@@ -108,6 +108,56 @@ if (isset($_POST['reg_camb'])) {
   }
 }
 
+if (isset($_POST['reg_tot'])) {
+  // receive all input values from the form
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $celular = mysqli_real_escape_string($db, $_POST['celular']);
+  $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+
+  $tipo = mysqli_real_escape_string($db, $_POST['nivel']);
+
+  // form validation: ensure that the form is correctly filled ...
+  // by adding (array_push()) corresponding error unto $errors array
+  if (empty($username)) { array_push($errors, "Username is required"); }
+  if (empty($celular)) { array_push($errors, "Celular is required"); }
+  if (empty($password_1)) { array_push($errors, "Password is required"); }
+
+
+  // first check the database to make sure 
+  // a user does not already exist with the same username and/or email
+  $user_check_query = "SELECT * FROM user WHERE name='$username'  LIMIT 1";
+  $result = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result);
+  
+  if ($user) { // if user exists
+    if ($user['name'] === $username) {
+      array_push($errors, "Username already exists");
+    }
+
+    
+  }
+
+  // Finally, register user if there are no errors in the form
+  if (count($errors) == 0) {
+  	$password = md5($password_1);//encrypt the password before saving in the database
+
+  	$query = "INSERT INTO user (name, celular, idSuperior, senha, tipo) 
+  			  VALUES('$username', '$celular','', '$password','$tipo')";
+  	mysqli_query($db, $query);
+
+
+    $user_check_query = "SELECT iduser FROM user WHERE name='$username'  LIMIT 1";
+    $result1 = mysqli_query($db, $user_check_query);
+  $user = mysqli_fetch_assoc($result1);
+  $idCriador =  $user['iduser'];
+
+
+    if($tipo=="1"){header('location: cambistas.php');}
+    else{header('location: jogadores.php');}
+  	
+  }
+}
+
 if (isset($_POST['reg_adm'])) {
   // receive all input values from the form
   $username = mysqli_real_escape_string($db, $_POST['username']);
@@ -332,13 +382,14 @@ if (isset($_POST['reg_apost'])) {
 
 if (isset($_POST['exc_camb'])) {
   $idDelet = mysqli_real_escape_string($db, $_POST['idDelet']);
+  $tipo = mysqli_real_escape_string($db, $_POST['tipo']);
   $sql = "DELETE FROM user WHERE iduser=$idDelet";
   //echo($idDelet);
 
   mysqli_query($db, $sql);
 
-
-    header('location: cambistas.php');
+  if($tipo=="1"){header('location: cambistas.php');}
+  else{header('location: jogadores.php');}
 }
 
 ?>

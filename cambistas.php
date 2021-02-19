@@ -227,13 +227,14 @@ echo(' <li class="nav-item">
                     echo("<tr>
                     <td>".$row['name']."</td>
                     <td>".$row['celular']."</td>
-                    <form id='exc_camb".$cont."' class='dropdown-item' method='post' action=''>
+                    <form id='exc_camb".$cont."' class='dropdown-item' method='post' action='cambistas.php'>
                     <input type='hidden' id='custId' name='idDelet' value='".$row['iduser']."'>
+                    <input type='hidden' id='tipo' name='tipo' value='1'>
                   </form>
-                    <td>
-                    <a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
-                      <a class='btn btn-danger' href=''><i class='fa fa-minus-square'".$cont."'></i></a>
-                    </td>
+                    <td style='display: flex;'> 
+                  <a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
+                     <div style='width: 44px !important; max-width: 30%; position: relative;'> <input  class='btn btn-danger' type='submit' form='exc_camb".$cont."' name='exc_camb'  value='    '/><i class='fa fa-minus-square'".$cont."' style='    position: absolute; left: 35%; top: 30%;  color: white; '></i></div >
+                  </td>
                   </tr>");
                   $cont +=1;
                    }
@@ -305,11 +306,11 @@ echo(' <li class="nav-item">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="">
+              <form method="POST" action="cambistas.php">
 
               <div class="form-group">
                 <label for="id_produto">Nome</label>
-                <input type="text" class="form-control mr-2" name="nome" placeholder="Nome" required>
+                <input type="text" class="form-control mr-2" name="username" placeholder="Nome" required>
               </div>
 
                 <div class="form-group">
@@ -317,19 +318,24 @@ echo(' <li class="nav-item">
                 <input type="text" class="form-control mr-2" name="celular" placeholder="Celular" id="celular" required>
               </div>
 
+              <div class="form-group">
+                <label for="id_user">Senha</label>
+                <input type="password" class="form-control mr-2"  id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Senha" name="password_1">
+              </div>
+
                <div class="form-group">
                 <label for="fornecedor">Nível</label>
                   <select class="form-control mr-2" id="category" name="nivel">
                                                             
-                    <option value="Aluno">Cambista</option> 
-                    <option value="Professor">Jogador</option> 
+                    <option value="1">Cambista</option> 
+                    <option value="2">Jogador</option> 
                        
                </select>
               </div>
             </div>
                    
             <div class="modal-footer">
-               <button type="submit" class="btn btn-success mb-3" name="salvar">Salvar </button>
+               <button type="submit" class="btn btn-success mb-3"  name="reg_tot">Salvar </button>
 
 
                 <button type="button" class="btn btn-danger mb-3" data-dismiss="modal">Cancelar </button>
@@ -375,3 +381,8 @@ echo(' <li class="nav-item">
     $(document).ready(function(){
       $('#telefone').mask('(00) 00000-0000');
 </script>
+
+</body>
+
+</html>
+
