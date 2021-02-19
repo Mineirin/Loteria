@@ -203,6 +203,7 @@ echo(' <li class="nav-item">
                   <thead>
                     <tr>
                       <th>id</th>
+                      <th>Nome</th>
                       <th>Números</th>
                       <th>Data</th>
                       <th>Ação</th>
@@ -211,6 +212,7 @@ echo(' <li class="nav-item">
                   <tfoot>
                     <tr>
                       <th>id</th>
+                      <th>Nome</th>
                       <th>Números</th>
                       <th>Data</th>
                       <th>Ação</th>
@@ -221,6 +223,7 @@ echo(' <li class="nav-item">
                   $cont =0;
                    while($row = $result->fetch_assoc()) {
                     echo("<tr>
+                    <td>".$row['idsorteio']."</td>
                     <td>".$row['nome']."</td>
                     <td>".$row['numeros']."</td>
                     <td>".$row['data']."</td>

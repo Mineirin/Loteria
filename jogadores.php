@@ -222,7 +222,7 @@ echo(' <li class="nav-item">
                   <?php 
                   $cont =0;
                    while($row = $result->fetch_assoc()) {
-
+//<a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
                     echo("<tr>
                     <td>".$row['name']."</td>
                     <td>".$row['celular']."</td>
@@ -231,7 +231,7 @@ echo(' <li class="nav-item">
                     <input type='hidden' id='tipo' name='tipo' value='2'>
                   </form>
                     <td style='display: flex;'> 
-                  <a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
+                  
                      <div style='width: 44px !important; max-width: 30%; position: relative;'> <input  class='btn btn-danger' type='submit' form='exc_camb".$cont."' name='exc_camb'  value='    '/><i class='fa fa-minus-square'".$cont."' style='    position: absolute; left: 35%; top: 30%;  color: white; '></i></div >
                   </td>
                   </tr>");
