@@ -1,4 +1,19 @@
+<?php 
 
+
+
+  $sql_sort = "SELECT * FROM sorteio ";
+  $result = mysqli_query($db,$sql_sort);
+  $num_rows = mysqli_num_rows($result);
+
+  $sql_user = 'SELECT * FROM user WHERE tipo = "1"';
+  $result1 = mysqli_query($db,$sql_user);
+  $num_rows1 = mysqli_num_rows($result1);
+
+  $sql_camb = 'SELECT * FROM user WHERE tipo = "2"';
+  $result2 = mysqli_query($db,$sql_camb);
+  $num_rows2 = mysqli_num_rows($result2);
+?>
 
 <div class="container-fluid">
           <div class="content cards-gerenciais">
@@ -15,7 +30,7 @@
                     <div class="col-7 col-md-8">
                       <div class="numbers">
                         <p class="card-category">Total de Usuários</p>
-                        <p class="card-title">150
+                        <p class="card-title"><?php echo isset( $num_rows2) ?  $num_rows2 : "0"; ?>
                           <p>
                       </div>
                     </div>
@@ -41,7 +56,7 @@
                     <div class="col-7 col-md-8">
                       <div class="numbers">
                         <p class="card-category">Saldo</p>
-                        <p class="card-title">$ 1,345
+                        <p class="card-title">0
                           <p>
                       </div>
                     </div>
@@ -67,7 +82,7 @@
                     <div class="col-7 col-md-8">
                       <div class="numbers">
                         <p class="card-category">Sorteio</p>
-                        <p class="card-title">23
+                        <p class="card-title"><?php echo isset( $num_rows) ?  $num_rows : "0"; ?>
                           <p>
                       </div>
                     </div>
@@ -93,7 +108,7 @@
                     <div class="col-7 col-md-8">
                       <div class="numbers">
                         <p class="card-category">Cambistas</p>
-                        <p class="card-title">45
+                        <p class="card-title"><?php echo isset( $num_rows1) ?  $num_rows1 : "0"; ?>
                           <p>
                       </div>
                     </div>

@@ -1,5 +1,5 @@
 <?php 
-  session_start(); 
+ include('php/server.php') ;
 
   if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -10,6 +10,8 @@
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
+
+  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
