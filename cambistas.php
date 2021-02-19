@@ -197,10 +197,9 @@ echo(' <li class="nav-item">
           <div class="card shadow mb-4">
             <div class="card-header py-3" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; margin-left: 10px;">
               <h6 class="m-0 font-weight-bold text-primary" style="width: 30%;">Cambistas Cadastrados</h6>
-              <a class='dropdown-item' href='registercambista.php' style="width: auto; background-color: lightgreen; color: black; border: 1px solid; border-radius: 6px;">
-                    <i class='fas fa-user fa-sm fa-fw mr-2 text-gray-400' style="color: black!important;"></i>
-                    Criar Cambista
-                  </a>
+              <div class="col-lg-2 col-md-9 col-sm-12">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo"> <i class="fas fa-user-plus"> USUÁRIOS </i> </button>
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -228,19 +227,13 @@ echo(' <li class="nav-item">
                     echo("<tr>
                     <td>".$row['name']."</td>
                     <td>".$row['celular']."</td>
-                    <form id='exc_camb".$cont."' class='dropdown-item' method='post' action='cambistas.php'>
+                    <form id='exc_camb".$cont."' class='dropdown-item' method='post' action=''>
                     <input type='hidden' id='custId' name='idDelet' value='".$row['iduser']."'>
                   </form>
-                    <td style='    padding: 0;
-                    margin: 0;
-                    display: flex;
-                    justify-content: center;'> 
-                  <input class='btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar' type='submit' form='exc_camb".$cont."' value='Excluir cambista' name='exc_camb' style='    background: #ff3535;
-                  color: white;
-                  width: 26%;
-                  margin: 10px;
-                  height: 100%;'/>
-                  </td>
+                    <td>
+                    <a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
+                      <a class='btn btn-danger' href=''><i class='fa fa-minus-square'".$cont."'></i></a>
+                    </td>
                   </tr>");
                   $cont +=1;
                    }
@@ -261,10 +254,10 @@ echo(' <li class="nav-item">
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2020</span>
           </div>
         </div>
       </footer>
@@ -301,6 +294,58 @@ echo(' <li class="nav-item">
     </div>
   </div>
 
+  <!-- Modal -->
+      <div id="modalExemplo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+         <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <h5 class="modal-title">Usuários</h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="">
+
+              <div class="form-group">
+                <label for="id_produto">Nome</label>
+                <input type="text" class="form-control mr-2" name="nome" placeholder="Nome" required>
+              </div>
+
+                <div class="form-group">
+                <label for="id_user">Celular</label>
+                <input type="text" class="form-control mr-2" name="celular" placeholder="Celular" id="celular" required>
+              </div>
+
+               <div class="form-group">
+                <label for="fornecedor">Nível</label>
+                  <select class="form-control mr-2" id="category" name="nivel">
+                                                            
+                    <option value="Aluno">Cambista</option> 
+                    <option value="Professor">Jogador</option> 
+                       
+               </select>
+              </div>
+            </div>
+                   
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-success mb-3" name="salvar">Salvar </button>
+
+
+                <button type="button" class="btn btn-danger mb-3" data-dismiss="modal">Cancelar </button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>    
+
+
+
+
+
+ <script> $("#modalEditar").modal("show"); </script> 
+
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -321,3 +366,12 @@ echo(' <li class="nav-item">
 </body>
 
 </html>
+<!--MASCARAS -->
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#telefone').mask('(00) 00000-0000');
+</script>
