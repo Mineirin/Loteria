@@ -22,7 +22,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Loteria - Dashboard</title>
+  <title>Sorteio Magnata</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -44,12 +44,11 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-      <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3">Loteria</div>
-    </a>
-
+        <div class="col">
+          <i class="fab fa-monero fa-3x"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Sorteio Magnata</div>
+      </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
@@ -222,7 +221,7 @@ echo(' <li class="nav-item">
                       
                           <i class="fas fa-check icon"></i>
                         
-                      <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar Sorteio" name="reg_apost"/>
+                      <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar Aposta" name="reg_apost"/>
                       </div>
                     </div>
                   </div>

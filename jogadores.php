@@ -28,7 +28,7 @@ include('php/server.php') ;
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Jogadores - Dashboard</title>
+  <title>Sorteio Magnata</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,10 +52,10 @@ include('php/server.php') ;
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="col">
+          <i class="fab fa-monero fa-3x"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Loteria</div>
+        <div class="sidebar-brand-text mx-3">Sorteio Magnata</div>
       </a>
 
       <!-- Divider -->

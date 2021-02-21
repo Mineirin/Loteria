@@ -25,7 +25,7 @@ include('php/server.php') ;
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Sorteios - Dashboard</title>
+  <title>Sorteio Magnata</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,10 +49,10 @@ include('php/server.php') ;
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="col">
+          <i class="fab fa-monero fa-3x"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Loteria</div>
+        <div class="sidebar-brand-text mx-3">Sorteio Magnata</div>
       </a>
 
       <!-- Divider -->
@@ -237,8 +237,8 @@ echo(' <li class="nav-item">
                   background-color: lightgreen;
                   color: black;
                   width: 32%;
-                  margin: 10px;
-                  height: 100%;'>Ver ganhadores
+                  margin: 0px;
+                  height: 50%;'><i class='fas fa-eye'></i>
                   </a>
                   </td>
                   </tr>");

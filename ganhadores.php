@@ -2,17 +2,17 @@
 include('php/server.php') ;
 
   if (!isset($_SESSION['username'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
   }
   if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['username']);
-  	header("location: login.php");
+    session_destroy();
+    unset($_SESSION['username']);
+    header("location: login.php");
   }
 
   if (isset($_GET['idsort'])) {
-  	$idSort = $_GET['idsort'];
+    $idSort = $_GET['idsort'];
   }else{
     header("location: index.php");
   }
@@ -279,7 +279,7 @@ echo(' <li class="nav-item">
                  $n2 = $arr2[4].$arr2[5];
                  $n3 = $arr2[8].$arr2[9];
                  $n4 = $arr2[12].$arr2[13];
-                 $n5 = $arr2[16].$arr2[17];
+                 //$n5 = $arr2[16].$arr2[17];
 
                 
                  

@@ -56,12 +56,11 @@ include('php/server.php') ;
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-      <div class="sidebar-brand-icon rotate-n-15">
-        <i class="fas fa-laugh-wink"></i>
-      </div>
-      <div class="sidebar-brand-text mx-3">Loteria</div>
-    </a>
-
+        <div class="col">
+          <i class="fab fa-monero fa-3x"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Sorteio Magnata</div>
+      </a>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
@@ -163,9 +162,7 @@ echo(' <li class="nav-item">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-          <div class="titulo">
-            <h1 class="h3 text-gray-800 text-center no-print">Sorteio Magnata</h1>
-          </div>
+          
           <!-- Topbar Search -->
          
           <ul class="navbar-nav ml-auto">
