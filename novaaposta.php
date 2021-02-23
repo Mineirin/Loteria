@@ -10,6 +10,11 @@
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
+
+
+  $sort_check_query = 'SELECT * FROM user';
+  $result = mysqli_query($db,$sort_check_query);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -197,12 +202,23 @@ echo(' <li class="nav-item">
                         <div class="col-md-6 d-flex align-items-center justify-content-center formss" id="teste123">
     
                         <div id="form">
-                          <form id="reg_sort" class="" method="post" action="novaaposta.php">
+                          <form id="reg_sort" class="" method="post" action="novaaposta.php" style="    display: flex; flex-direction: column;">
+                          <select name="idUser" required  class="teste" style="height: 40px; border: solid 1px; border-radius: 4px; text-align: center;">
+                          <option ></option>
+                            <?php 
+                            while($row = $result->fetch_assoc()) {
+                                echo("<option value='".$row['iduser']."'>".$row['name']."</option>");
+                            }
+                            ?>
+                            
+  </select>
+                          </br>
+                              <div>
                               <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n1"/>
 <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
 <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>
 <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n4"/>
-<input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/>
+<input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/></div>
                                         </form>
     
     </div>

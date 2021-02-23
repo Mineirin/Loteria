@@ -21,7 +21,7 @@ include('php/server.php') ;
   $result = mysqli_query($db,$sort_check_query);
   $user = mysqli_fetch_assoc($result);
     $numeros =  $user['numeros'];
-    echo($numeros);
+ 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -279,7 +279,7 @@ echo(' <li class="nav-item">
                  $n2 = $arr2[4].$arr2[5];
                  $n3 = $arr2[8].$arr2[9];
                  $n4 = $arr2[12].$arr2[13];
-                 //$n5 = $arr2[16].$arr2[17];
+                 $n5 = $arr2[16].$arr2[17];
 
                 
                  

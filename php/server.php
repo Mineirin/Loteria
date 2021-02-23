@@ -331,6 +331,7 @@ if (isset($_POST['reg_apost'])) {
   $n3 = mysqli_real_escape_string($db, $_POST['n3']);
   $n4 = mysqli_real_escape_string($db, $_POST['n4']);
   $n5 = mysqli_real_escape_string($db, $_POST['n5']);
+  $idUser = mysqli_real_escape_string($db, $_POST['idUser']);
 
 
 
@@ -344,6 +345,7 @@ if (isset($_POST['reg_apost'])) {
   if (empty($n3)) { array_push($errors, "Terceiro numero faltando"); }
   if (empty($n4)) { array_push($errors, "Quarto numero faltando"); }
   if (empty($n5)) { array_push($errors, "Quinto numero faltando"); }
+  if (empty($idUser)) { array_push($errors, "Usuario faltando"); }
 
   if (strlen($n1)==1) { $n1 = "0$n1"; }
   if (strlen($n2)==1) { $n2 = "0$n2"; }
@@ -358,7 +360,7 @@ if (isset($_POST['reg_apost'])) {
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
         
-    $idUser = $_SESSION['id'];
+    //$idUser = $_SESSION['id'];
 
 
   
