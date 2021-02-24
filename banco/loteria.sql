@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Fev-2021 às 06:14
--- Versão do servidor: 10.4.14-MariaDB
--- versão do PHP: 7.4.11
+-- Tempo de geração: 24/02/2021 às 19:59
+-- Versão do servidor: 10.4.11-MariaDB
+-- Versão do PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `apostas`
+-- Estrutura para tabela `apostas`
 --
 
 CREATE TABLE `apostas` (
@@ -35,7 +35,7 @@ CREATE TABLE `apostas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `apostas`
+-- Despejando dados para a tabela `apostas`
 --
 
 INSERT INTO `apostas` (`idapostas`, `numeros`, `idUser`, `idSorteio`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `apostas` (`idapostas`, `numeros`, `idUser`, `idSorteio`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `sorteio`
+-- Estrutura para tabela `sorteio`
 --
 
 CREATE TABLE `sorteio` (
@@ -60,7 +60,7 @@ CREATE TABLE `sorteio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `sorteio`
+-- Despejando dados para a tabela `sorteio`
 --
 
 INSERT INTO `sorteio` (`idsorteio`, `data`, `numeros`, `nome`, `idCriador`) VALUES
@@ -85,12 +85,16 @@ INSERT INTO `sorteio` (`idsorteio`, `data`, `numeros`, `nome`, `idCriador`) VALU
 (22, '17/02/2021', '01, 02, 50, 60, 70', 'vai la', 4),
 (23, '17/02/2021', '01, 02, 50, 70, 80', 'wwww', 4),
 (24, '17/02/2021', '07, 21, 34, 67, 80', 'hghghg', 1),
-(25, '17/02/2021', '01, 02, 03, 04, 05', 'oioi', 1);
+(25, '17/02/2021', '01, 02, 03, 04, 05', 'oioi', 1),
+(26, '18/02/2021', '14, 15, 18, 23, 25', 'Sorteio12', 3),
+(27, '19/02/2021', '12, 15, 25, 35, 50', 'Sorteio3', 3),
+(28, '19/02/2021', '13, 15, 25, 32, 40', 'sorteio4', 3),
+(29, '22/02/2021', '15, 16, 17, 18, 19', 'Sorteio 5', 3);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura para tabela `user`
 --
 
 CREATE TABLE `user` (
@@ -99,45 +103,49 @@ CREATE TABLE `user` (
   `celular` varchar(45) NOT NULL,
   `senha` varchar(100) NOT NULL,
   `tipo` varchar(45) NOT NULL DEFAULT '0',
-  `idSuperior` int(11) DEFAULT NULL
+  `idSuperior` int(11) DEFAULT NULL,
+  `nivel` varchar(15) NOT NULL,
+  `data` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `user`
+-- Despejando dados para a tabela `user`
 --
 
-INSERT INTO `user` (`iduser`, `name`, `celular`, `senha`, `tipo`, `idSuperior`) VALUES
-(1, 'maipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1),
-(2, 'LuisFelipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1),
-(3, 'admin', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 15),
-(4, 'maipee', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '1', 0),
-(5, 'userT1', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 0),
-(7, 'userT3', '19191119199', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 0);
+INSERT INTO `user` (`iduser`, `name`, `celular`, `senha`, `tipo`, `idSuperior`, `nivel`, `data`) VALUES
+(1, 'maipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1, '', '0000-00-00'),
+(2, 'LuisFelipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1, '', '0000-00-00'),
+(3, 'admin', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 15, '', '0000-00-00'),
+(4, 'maipee', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '1', 0, '', '0000-00-00'),
+(5, 'userT1', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 0, '', '0000-00-00'),
+(7, 'userT3', '19191119199', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 0, '', '0000-00-00'),
+(10, 'siberin', '19999999999', '202cb962ac59075b964b07152d234b70', '2', 0, '', '0000-00-00'),
+(11, 'Maria', '1987263592', '202cb962ac59075b964b07152d234b70', '1', 0, '', '0000-00-00');
 
 --
--- Índices para tabelas despejadas
+-- Índices de tabelas apagadas
 --
 
 --
--- Índices para tabela `apostas`
+-- Índices de tabela `apostas`
 --
 ALTER TABLE `apostas`
   ADD PRIMARY KEY (`idapostas`);
 
 --
--- Índices para tabela `sorteio`
+-- Índices de tabela `sorteio`
 --
 ALTER TABLE `sorteio`
   ADD PRIMARY KEY (`idsorteio`);
 
 --
--- Índices para tabela `user`
+-- Índices de tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`iduser`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
@@ -150,13 +158,13 @@ ALTER TABLE `apostas`
 -- AUTO_INCREMENT de tabela `sorteio`
 --
 ALTER TABLE `sorteio`
-  MODIFY `idsorteio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idsorteio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
