@@ -7,7 +7,7 @@ $celular    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'lotiria');
+$db = mysqli_connect('localhost', 'root', '', 'loteria');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
