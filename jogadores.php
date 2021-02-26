@@ -209,6 +209,7 @@ echo(' <li class="nav-item">
                       <th>Nome</th>
                       <th>Celular</th>
                       <th>Ação</th>
+                      <th>Cadastrado</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -216,12 +217,27 @@ echo(' <li class="nav-item">
                       <th>Nome</th>
                       <th>Celular</th>
                       <th>Ação</th>
+                      <th>Cadastrado</th>
                     </tr>
                   </tfoot>
                   <tbody>
                   <?php 
                   $cont =0;
                    while($row = $result->fetch_assoc()) {
+                    if($row['idSuperior']==0){
+                      $nammm =  "Desconhecido";
+                    }
+                    else{
+                      $user_check_query = 'SELECT * FROM user WHERE iduser='.$row['idSuperior'].'  LIMIT 1';
+                      //echo($user_check_query );
+                    $result1 = mysqli_query($db, $user_check_query);
+
+                    
+                    
+                    $user = mysqli_fetch_assoc($result1);
+                    $nammm =  $user['name'];
+                    }
+                    
 //<a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
                     echo("<tr>
                     <td>".$row['name']."</td>
@@ -234,6 +250,7 @@ echo(' <li class="nav-item">
                   
                      <div style='width: 44px !important; max-width: 30%; position: relative;'> <input  class='btn btn-danger' type='submit' form='exc_camb".$cont."' name='exc_camb'  value='    '/><i class='fa fa-minus-square'".$cont."' style='    position: absolute; left: 35%; top: 30%;  color: white; '></i></div >
                   </td>
+                  <td>".$nammm."</td>
                   </tr>");
                   $cont +=1;
                    }

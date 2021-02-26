@@ -7,7 +7,7 @@ $celular    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'loteria');
+$db = mysqli_connect('localhost', 'root', '', 'lotiria');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -38,13 +38,13 @@ if (isset($_POST['reg_user'])) {
 
     
   }
-
+  $idsup= $_SESSION['id'];
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
-  	$query = "INSERT INTO user (name, celular, idSuperior, senha, tipo) 
-  			  VALUES('$username', '$celular','', '$password','$tipo')";
+  	$query = "INSERT INTO user (name, celular, senha, tipo, idSuperior) 
+  			  VALUES('$username', '$celular', '$password','$tipo','$idsup')";
   	mysqli_query($db, $query);
 
 
@@ -136,13 +136,13 @@ if (isset($_POST['reg_tot'])) {
 
     
   }
-
+  $idsup= $_SESSION['id'];
   // Finally, register user if there are no errors in the form
   if (count($errors) == 0) {
   	$password = md5($password_1);//encrypt the password before saving in the database
 
   	$query = "INSERT INTO user (name, celular, idSuperior, senha, tipo) 
-  			  VALUES('$username', '$celular','', '$password','$tipo')";
+  			  VALUES('$username', '$celular','$idsup', '$password','$tipo')";
   	mysqli_query($db, $query);
 
 
