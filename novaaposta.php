@@ -12,7 +12,7 @@
   }
 
 
-  $sort_check_query = 'SELECT * FROM user';
+  $sort_check_query = 'SELECT * FROM user WHERE tipo = "2"';
   $result = mysqli_query($db,$sort_check_query);
 
 ?>
