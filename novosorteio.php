@@ -44,6 +44,32 @@ include('php/server.php') ;
   <link rel="stylesheet" href="css/print.css">
   <link rel="stylesheet" href="css/stylesorteio.css">
 
+  <style>
+    @media(max-width:836px){
+
+.oola{
+    margin-right: 10px !important;
+    background-color: blue!important;
+    border: solid!important;
+    border-radius: 50%!important;
+    padding: 5px!important;
+    font-size: 30px!important;
+    align-self: center!important;
+    color: white!important;
+}
+#oola{
+    margin-right: 10px;
+    background-color: blue;
+    border: solid;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 30px;
+    align-self: center;
+    color: white;
+}
+}
+  </style>
+
 </head>
 
 <body id="page-top">
@@ -241,35 +267,8 @@ echo(' <li class="nav-item">
                   <h6 class="m-0 font-weight-bold text-primary text-center">Confira quais números foram sorteados</h6>
                 </div>
                 <div class="card-body">
-                <?php 
-                  if (isset($_GET['idSort'])) {
-                    $idSort = $_GET['idSort'];
-
-                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='. $idSort.'  LIMIT 1';
-                      //echo($user_check_query );
-                    $result1 = mysqli_query($db, $user_check_query);
-
-                    
-                    
-                    $user = mysqli_fetch_assoc($result1);
-                    $num =  $user['numeros'];
-                    $arr1 = str_split($num);
-                    echo("
-                    <div class='row'>
-                    <div class='col-md-12 numeros'>
-                      <h2 class=' h4 text-center'>Números Sorteados</h2>
-                      <div class='justify-content-center text-center col-md-12 numeros'>
-                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[0].$arr1[1]."</span>
-                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[4].$arr1[5]."</span>
-                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[8].$arr1[9]."</span>
-                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[12].$arr1[13]."</span>
-                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[16].$arr1[17]."</span>
-                    </div>
-                  </div>
-                </div>
-                    ");
-                  }
-                  ?>
+                
+               
                   
                   
                             <!-- Begin Page Content -->
@@ -284,6 +283,51 @@ echo(' <li class="nav-item">
           <div class="d-sm-flex align-items-center justify-content-between mb-4 only-print">
             <h1 class="h3 mb-0 text-gray-800">Relatório Resumo dos Sorteios</h1>
             <button onclick="window.print()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm no-print"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</button>
+          </div>
+          <div style="position: relative;    display: flex; /* height: 90%; */ justify-content: center; align-items: center;">
+
+
+          <?php 
+                  if (isset($_GET['idSort'])) {
+                    $idSort = $_GET['idSort'];
+
+                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='. $idSort.'  LIMIT 1';
+                      //echo($user_check_query );
+                    $result1 = mysqli_query($db, $user_check_query);
+                      echo(' <img src="loteria.jpeg" alt="Girl in a jacket" style="width: 100%;">');
+                    
+                    
+                    $user = mysqli_fetch_assoc($result1);
+                    $num =  $user['numeros'];
+                    $arr1 = str_split($num);
+                    echo('
+                    <div style="position: absolute; top: 45%; display: flex; /*left: 175px;*/">
+                    <h1 id="oola" class="oola" style=" margin-right: 20px; background-color: blue; border: solid; border-radius: 50%; padding: 10px; color: white;">'.$arr1[0].$arr1[1].'</h1>
+                    <h1 id="oola" class="oola" style=" margin-right: 20px; background-color: blue; border: solid; border-radius: 50%; padding: 10px; color: white;">'.$arr1[4].$arr1[5].'</h1>
+                    <h1 id="oola" class="oola" style=" margin-right: 20px; background-color: blue; border: solid; border-radius: 50%; padding: 10px; color: white;">'.$arr1[8].$arr1[9].'</h1>
+                    <h1 id="oola" class="oola" style=" margin-right: 20px; background-color: blue; border: solid; border-radius: 50%; padding: 10px; color: white;">'.$arr1[12].$arr1[13].'</h1>
+                    <h1 id="oola" class="oola" style=" margin-right: 20px; background-color: blue; border: solid; border-radius: 50%; padding: 10px; color: white;">'.$arr1[16].$arr1[17].'</h1>
+                    </div>
+                    
+                    ');
+                  }
+                  /*<div class='row'>
+                    <div class='col-md-12 numeros'>
+                      <h2 class=' h4 text-center'>Números Sorteados</h2>
+                      <div class='justify-content-center text-center col-md-12 numeros'>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[0].$arr1[1]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[4].$arr1[5]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[8].$arr1[9]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[12].$arr1[13]."</span>
+                      <span class='badge badge-pill badge-primary p-3 text-lg'>".$arr1[16].$arr1[17]."</span>
+                    </div>
+                  </div>
+                </div> */
+                  ?>
+
+
+         
+         
           </div>
           <div class="card-header">
             <h6 class="h4 mb-1 text-gray-800 text-center">Ganhadores</h6>

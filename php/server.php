@@ -7,7 +7,7 @@ $celular    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'loteria');
+$db = mysqli_connect('localhost', 'root', '', 'lotiria');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -153,7 +153,8 @@ if (isset($_POST['reg_tot'])) {
 
 
     if($tipo=="1"){header('location: cambistas.php');}
-    else{header('location: jogadores.php');}
+    elseif($tipo=="2"){header('location: jogadores.php');}
+    else{header('location: index.php');}
   	
   }
 }

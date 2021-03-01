@@ -1,3 +1,7 @@
+.teeetee{
+    margin: 10px !important;
+}
+
 #form {
     width: 100%;
     display: flex;
@@ -49,4 +53,19 @@
     width: 30%;
     padding: .5rem 1rem;
     padding-left: 40px;
+}
+
+
+@media(max-width:836px){
+
+    .ola{
+        margin-right: 10px;
+        background-color: blue;
+        border: solid;
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 30px;
+        align-self: center;
+        color: white;
+    }
 }

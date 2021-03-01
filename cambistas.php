@@ -208,6 +208,7 @@ echo(' <li class="nav-item">
                       <th>Nome</th>
                       <th>Celular</th>
                       <th>Ação</th>
+                      <th>Cadastrado</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -215,6 +216,7 @@ echo(' <li class="nav-item">
                       <th>Nome</th>
                       <th>Celular</th>
                       <th>Ação</th>
+                      <th>Cadastrado</th>
                     </tr>
                   </tfoot>
                   
@@ -222,18 +224,43 @@ echo(' <li class="nav-item">
                   <?php 
                   $cont =0;
                    while($row = $result->fetch_assoc()) {
+                    if($row['idSuperior']==0){
+                      $nammm =  "Desconhecido";
+                    }
+                    else{
+                      $user_check_query = 'SELECT * FROM user WHERE iduser='.$row['idSuperior'].'  LIMIT 1';
+                      //echo($user_check_query );
+                    $result1 = mysqli_query($db, $user_check_query);
+
+                    
+                    
+                    $user = mysqli_fetch_assoc($result1);
+                    $nammm =  $user['name'];
+                    $idd = $user['iduser'];
+                    
+                    }
+                    $idsup= $_SESSION['id'];
 //<a class='btn btn-info' href=''><i class='fas fa-edit'></i></a>
                     echo("<tr>
                     <td>".$row['name']."</td>
                     <td>".$row['celular']."</td>
-                    <form id='exc_camb".$cont."' class='dropdown-item' method='post' action='cambistas.php'>
+                    ");
+
+                  if($idd == $idsup){
+                    echo("<form id='exc_camb".$cont."' class='dropdown-item' method='post' action='cambistas.php'>
                     <input type='hidden' id='custId' name='idDelet' value='".$row['iduser']."'>
                     <input type='hidden' id='tipo' name='tipo' value='1'>
                   </form>
                     <td style='display: flex;'> 
                   
                      <div style='width: 44px !important; max-width: 30%; position: relative;'> <input  class='btn btn-danger' type='submit' form='exc_camb".$cont."' name='exc_camb'  value='    '/><i class='fa fa-minus-square'".$cont."' style='    position: absolute; left: 35%; top: 30%;  color: white; '></i></div >
-                  </td>
+                  </td>");
+                  }
+                  else{
+                    echo("<td></td>
+                    ");
+                  }
+                  echo("<td>".$nammm."</td>
                   </tr>");
                   $cont +=1;
                    }
@@ -327,7 +354,7 @@ echo(' <li class="nav-item">
                   <select class="form-control mr-2" id="category" name="nivel">
                                                             
                     <option value="1">Cambista</option> 
-                    <option value="2">Jogador</option> 
+                    <option value="0">ADM</option> 
                        
                </select>
               </div>
