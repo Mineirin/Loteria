@@ -215,10 +215,15 @@ echo(' <li class="nav-item">
                           </br>
                               <div>
                               <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n1"/>
-<input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
-<input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>
-<input class="teste" type="text" maxLength="2"  min="0" max="80" name="n4"/>
-<input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/></div>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n2"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n3"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n4"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n5"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n6"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n7"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n8"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n9"/>
+                              <input class="teste" type="text" maxLength="2"  min="0" max="80" name="n10"/></div>
                                         </form>
     
     </div>

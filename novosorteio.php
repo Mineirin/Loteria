@@ -359,189 +359,208 @@ echo(' <li class="nav-item">
                   <?php 
                   if (isset($_GET['idSort'])) {
                     $idSort = $_GET['idSort'];
-                    $colo =1; 
-
-                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='. $idSort.'  LIMIT 1';
-                      //echo($user_check_query );
-                    $result1 = mysqli_query($db, $user_check_query);
-
-                    
-                    $cesta = array();
-
-
-                    $user = mysqli_fetch_assoc($result1);
-                    $num =  $user['numeros'];
-                 
-                    $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort.' AND numeros ="'.$num.'"  ';
-
-                    $result12 = mysqli_query($db,$sort_check_query);
-
-                    
-                  while($row = $result12->fetch_assoc()) {
-                    $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
-
-                    $result1 = mysqli_query($db, $user_check_query);
-                    $user = mysqli_fetch_assoc($result1);
-                    $idCriador =  $user['name'];
-                    $numero = $user['celular'];
-                    array_push($cesta,$row['idapostas']);
-                    echo("
-                    <tr>
-                    <td>".$colo."</td>
-                      <td>".$idCriador."</td>
-                      <td>".$row['numeros']."</td>
                       
-                      <td>".$numero."</td>
-                      
-                    </tr>
-                    
-                    ");
-                    $colo ++;
-                 }
-                 
-                 $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort;
-                 $result3 = mysqli_query($db,$sort_check_query);
-                 $arr2 = str_split($num);
-
-
-                 $n1 = $arr2[0].$arr2[1];
-                 $n2 = $arr2[4].$arr2[5];
-                 $n3 = $arr2[8].$arr2[9];
-                 $n4 = $arr2[12].$arr2[13];
-                 $n5 = $arr2[16].$arr2[17];
-
-                
-                 
-                 
-
-
-                 while($row = $result3->fetch_assoc()) {
-                   if(!in_array($row['idapostas'], $cesta)){
-                    $arr2 = str_split($row['numeros']);
-                    $n1ap = $arr2[0].$arr2[1];
-                    $n2ap = $arr2[4].$arr2[5];
-                    $n3ap = $arr2[8].$arr2[9];
-                    $n4ap = $arr2[12].$arr2[13];
-                    $n5ap = $arr2[16].$arr2[17];
-
-                     if(
-                       ($n1 == $n1ap && $n2 == $n2ap && $n3 == $n3ap && $n4 == $n4ap)||
-                       ($n1 == $n1ap && $n2 == $n2ap && $n3 == $n3ap && $n5 == $n5ap)||
-                       ($n1 == $n1ap && $n2 == $n2ap && $n4 == $n4ap && $n5 == $n5ap)||
-                       ($n1 == $n1ap && $n3 == $n3ap && $n4 == $n4ap && $n5 == $n5ap)||
-                       ($n2 == $n2ap && $n3 == $n3ap && $n4 == $n4ap && $n5 == $n5ap)
-                     ){
-                  $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
-
-                  $result1 = mysqli_query($db, $user_check_query);
-                  $user = mysqli_fetch_assoc($result1);
-                  $idCriador =  $user['name'];
-                  $numero = $user['celular'];
-                  array_push($cesta,$row['idapostas']);
-                  echo("
-                  <tr>
-                  <td>".$colo."</td>
-                    <td>".$idCriador."</td>
-                    <td>".$row['numeros']."</td>
-                    
-                    <td>".$numero."</td>
-                    
-                  </tr>
+                    $cont =0;
                   
-                  ");
-                  $colo ++;
-               }}}
-              
-               $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort;
-                 $result4 = mysqli_query($db,$sort_check_query);
+                    $colo =1; 
+  
+                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='. $idSort.'  LIMIT 1';
+                        //echo($user_check_query );
+                      $result1 = mysqli_query($db, $user_check_query);
+  
+                      
+                      $cesta = array();
+  
+  
+                      $user = mysqli_fetch_assoc($result1);
+                      $num =  $user['numeros'];
+  
+  
+                   $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort;
+                   $result3 = mysqli_query($db,$sort_check_query);
+                   $arr2 = str_split($num);
+  
+  
+                   $n1 = $arr2[0].$arr2[1];
+                   $n2 = $arr2[4].$arr2[5];
+                   $n3 = $arr2[8].$arr2[9];
+                   $n4 = $arr2[12].$arr2[13];
+                   $n5 = $arr2[16].$arr2[17];
+  
+                   $arr5n = array();
+                   $arr4n = array();
+                   $arr3n = array();
+                   $arr2n = array();
+  
+                   $colo = 1;
+                   
+                   
+  
+  
+                   while($row = $result3->fetch_assoc()) {
+                      $arr2 = str_split($row['numeros']);
+                      $n1ap = $arr2[0].$arr2[1];
+                      $n2ap = $arr2[4].$arr2[5];
+                      $n3ap = $arr2[8].$arr2[9];
+                      $n4ap = $arr2[12].$arr2[13];
+                      $n5ap = $arr2[16].$arr2[17];
+                      $n6ap = $arr2[20].$arr2[21];
+                      $n7ap = $arr2[24].$arr2[25];
+                      $n8ap = $arr2[28].$arr2[29];
+                      $n9ap = $arr2[32].$arr2[33];
+                      $n10ap = $arr2[36].$arr2[37];
 
-               while($row = $result4->fetch_assoc()) {
-                if(!in_array($row['idapostas'], $cesta)){
-                 $arr2 = str_split($row['numeros']);
-                 $n1ap = $arr2[0].$arr2[1];
-                 $n2ap = $arr2[4].$arr2[5];
-                 $n3ap = $arr2[8].$arr2[9];
-                 $n4ap = $arr2[12].$arr2[13];
-                 $n5ap = $arr2[16].$arr2[17];
-
-                  if(
-                    ($n1 == $n1ap && $n2 == $n2ap && $n3 == $n3ap)||
-                    ($n1 == $n1ap && $n2 == $n2ap && $n4 == $n4ap)||
-                    ($n1 == $n1ap && $n2 == $n2ap && $n5 == $n5ap)||
-                    ($n1 == $n1ap && $n3 == $n3ap && $n4 == $n4ap)||
-                    ($n1 == $n1ap && $n3 == $n3ap && $n5 == $n5ap)||
-                    ($n1 == $n1ap && $n4 == $n4ap && $n5 == $n5ap)||
-                    ($n2 == $n2ap && $n3 == $n3ap && $n5 == $n5ap)||
-                    ($n2 == $n2ap && $n3 == $n3ap && $n4 == $n4ap)||
-                    ($n2 == $n2ap && $n4 == $n4ap && $n5 == $n5ap)
-                  ){
-               $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
-
-               $result1 = mysqli_query($db, $user_check_query);
-               $user = mysqli_fetch_assoc($result1);
-               $idCriador =  $user['name'];
-               $numero = $user['celular'];
-               array_push($cesta,$row['idapostas']);
-               echo("
-               <tr>
-               <td>".$colo."</td>
-                 <td>".$idCriador."</td>
-                 <td>".$row['numeros']."</td>
+  
+                      $arr3 = array($n1ap,$n2ap,$n3ap,$n4ap,$n5ap,$n6ap,$n7ap,$n8ap,$n9ap,$n10ap);
+                      
+                      //array_push(idapostas);
+                      $cont =0;
+                      for($i = 0; $i<10;$i++){
+                        if($n1 == $arr3[$i]){
+                          $cont++;
+                        }
+                        elseif($n2 == $arr3[$i]){
+                          $cont++;
+                        }
+                        elseif($n3 == $arr3[$i]){
+                          $cont++;
+                        }
+                        elseif($n4 == $arr3[$i]){
+                          $cont++;
+                        }
+                        elseif($n5 == $arr3[$i]){
+                          $cont++;
+                        }
+                      }
+                      if($cont==5){
+                        array_push( $arr5n,$row['idapostas']);
+                      }
+                      elseif($cont==4){
+                        array_push( $arr4n,$row['idapostas']);
+                      }
+                      elseif($cont==3){
+                        array_push( $arr3n,$row['idapostas']);
+                      }
+                      elseif($cont==2){
+                        array_push( $arr2n,$row['idapostas']);
+                      }
+  
+                       }
+                      
+                       
+                for($i = 0; $i<sizeof($arr5n); $i++){
+                  $sort_check_query = 'SELECT * FROM apostas WHERE idapostas='.$arr5n[$i].'  LIMIT 1';
+                   $result4 = mysqli_query($db,$sort_check_query);
+                   $ap = mysqli_fetch_assoc($result4);
+  
+  
+                   $user_check_query = 'SELECT * FROM user WHERE iduser="'. $ap['idUser'].'"  LIMIT 1';
+                   $result1 = mysqli_query($db, $user_check_query);
+                   $user = mysqli_fetch_assoc($result1);
+                   $idCriador =  $user['name'];
+                   $numero = $user['celular'];
+  
+                   echo("
+                   <tr>
+                   <td>".$colo."</td>
+                     <td>".$idCriador."</td>
+                     <td>".$ap['numeros']."</td>
+                     <td>".$numero."</td>
+                     <td></td>
+                   </tr>
+                   
+                   ");
+                   $colo ++;
+  
+                }
                  
-                 <td>".$numero."</td>
-                 
-               </tr>
-               
-               ");
-               $colo ++;
-            }}}
+                for($i = 0; $i<sizeof($arr4n); $i++){
+                  $sort_check_query = 'SELECT * FROM apostas WHERE idapostas='.$arr4n[$i].'  LIMIT 1';
+                   $result4 = mysqli_query($db,$sort_check_query);
+                   $ap = mysqli_fetch_assoc($result4);
+  
+  
+                   $user_check_query = 'SELECT * FROM user WHERE iduser="'. $ap['idUser'].'"  LIMIT 1';
+                   $result1 = mysqli_query($db, $user_check_query);
+                   $user = mysqli_fetch_assoc($result1);
+                   $idCriador =  $user['name'];
+                   $numero = $user['celular'];
+  
+                   echo("
+                   <tr>
+                   <td>".$colo."</td>
+                     <td>".$idCriador."</td>
+                     <td>".$ap['numeros']."</td>
+                     <td>".$numero."</td>
+                     <td></td>
+                   </tr>
+                   
+                   ");
+                   $colo ++;
+  
+                }
+  
+                for($i = 0; $i<sizeof($arr3n); $i++){
+                  $sort_check_query = 'SELECT * FROM apostas WHERE idapostas='.$arr3n[$i].'  LIMIT 1';
+                   $result4 = mysqli_query($db,$sort_check_query);
+                   $ap = mysqli_fetch_assoc($result4);
+  
+  
+                   $user_check_query = 'SELECT * FROM user WHERE iduser="'. $ap['idUser'].'"  LIMIT 1';
+                   $result1 = mysqli_query($db, $user_check_query);
+                   $user = mysqli_fetch_assoc($result1);
+                   $idCriador =  $user['name'];
+                   $numero = $user['celular'];
+  
+                   echo("
+                   <tr>
+                   <td>".$colo."</td>
+                     <td>".$idCriador."</td>
+                     <td>".$ap['numeros']."</td>
+                     <td>".$numero."</td>
+                     <td></td>
+                   </tr>
+                   
+                   ");
+                   $colo ++;
+  
+                }
+  
+                for($i = 0; $i<sizeof($arr2n); $i++){
+                  $sort_check_query = 'SELECT * FROM apostas WHERE idapostas='.$arr2n[$i].'  LIMIT 1';
+                   $result4 = mysqli_query($db,$sort_check_query);
+                   $ap = mysqli_fetch_assoc($result4);
+  
+  
+                   $user_check_query = 'SELECT * FROM user WHERE iduser="'. $ap['idUser'].'"  LIMIT 1';
+                   $result1 = mysqli_query($db, $user_check_query);
+                   $user = mysqli_fetch_assoc($result1);
+                   $idCriador =  $user['name'];
+                   $numero = $user['celular'];
+  
+                   echo("
+                   <tr>
+                   <td>".$colo."</td>
+                     <td>".$idCriador."</td>
+                     <td>".$ap['numeros']."</td>
+                     <td>".$numero."</td>
+                     <td></td>
+                   </tr>
+                   
+                   ");
+                   $colo ++;
+  
+                }
 
-            $sort_check_query = 'SELECT * FROM apostas WHERE idSorteio='.$idSort;
-                 $result5 = mysqli_query($db,$sort_check_query);
 
-            while($row = $result5->fetch_assoc()) {
-              if(!in_array($row['idapostas'], $cesta)){
-               $arr2 = str_split($row['numeros']);
-               $n1ap = $arr2[0].$arr2[1];
-               $n2ap = $arr2[4].$arr2[5];
-               $n3ap = $arr2[8].$arr2[9];
-               $n4ap = $arr2[12].$arr2[13];
-               $n5ap = $arr2[16].$arr2[17];
 
-                if(
-                  ($n1 == $n1ap && $n2 == $n2ap)||
-                  ($n1 == $n1ap && $n3 == $n3ap)||
-                  ($n1 == $n1ap && $n5 == $n5ap)||
-                  ($n1 == $n1ap && $n4 == $n4ap)||
-                  ($n2 == $n2ap && $n3 == $n3ap)||
-                  ($n2 == $n2ap && $n4 == $n4ap)||
-                  ($n2 == $n2ap && $n5 == $n5ap)||
-                  ($n3 == $n3ap && $n4 == $n4ap)||
-                  ($n3 == $n3ap && $n5 == $n5ap)||
-                  ($n4 == $n4ap && $n5 == $n5ap)
-                ){
-             $user_check_query = 'SELECT * FROM user WHERE iduser="'. $row['idUser'].'"  LIMIT 1';
 
-             $result1 = mysqli_query($db, $user_check_query);
-             $user = mysqli_fetch_assoc($result1);
-             $idCriador =  $user['name'];
-             $numero = $user['celular'];
-             array_push($cesta,$row['idapostas']);
-             echo("
-             <tr>
-             <td>".$colo."</td>
-               <td>".$idCriador."</td>
-               <td>".$row['numeros']."</td>
-               
-               <td>".$numero."</td>
-               
-             </tr>
-             
-             ");
-             $colo ++;
-          }}}
+                    
+                  }
+                    
 
-                   }
+                    
+                
 
                    
                   ?>

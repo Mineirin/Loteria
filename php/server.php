@@ -7,7 +7,7 @@ $celular    = "";
 $errors = array(); 
 
 // connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'loteria');
+$db = mysqli_connect('localhost', 'root', '', 'lotiria');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -332,6 +332,11 @@ if (isset($_POST['reg_apost'])) {
   $n3 = mysqli_real_escape_string($db, $_POST['n3']);
   $n4 = mysqli_real_escape_string($db, $_POST['n4']);
   $n5 = mysqli_real_escape_string($db, $_POST['n5']);
+  $n6 = mysqli_real_escape_string($db, $_POST['n6']);
+  $n7 = mysqli_real_escape_string($db, $_POST['n7']);
+  $n8 = mysqli_real_escape_string($db, $_POST['n8']);
+  $n9 = mysqli_real_escape_string($db, $_POST['n9']);
+  $n10 = mysqli_real_escape_string($db, $_POST['n10']);
   $idUser = mysqli_real_escape_string($db, $_POST['idUser']);
 
 
@@ -346,6 +351,11 @@ if (isset($_POST['reg_apost'])) {
   if (empty($n3)) { array_push($errors, "Terceiro numero faltando"); }
   if (empty($n4)) { array_push($errors, "Quarto numero faltando"); }
   if (empty($n5)) { array_push($errors, "Quinto numero faltando"); }
+  if (empty($n6)) { array_push($errors, "Sexto numero faltando"); }
+  if (empty($n7)) { array_push($errors, "Setimo numero faltando"); }
+  if (empty($n8)) { array_push($errors, "Oitavo numero faltando"); }
+  if (empty($n9)) { array_push($errors, "Nono numero faltando"); }
+  if (empty($n10)) { array_push($errors, "Decimo numero faltando"); }
   if (empty($idUser)) { array_push($errors, "Usuario faltando"); }
 
   if (strlen($n1)==1) { $n1 = "0$n1"; }
@@ -353,6 +363,11 @@ if (isset($_POST['reg_apost'])) {
   if (strlen($n3)==1) { $n3 = "0$n3"; }
   if (strlen($n4)==1) { $n4 = "0$n4"; }
   if (strlen($n5)==1) { $n5 = "0$n5"; }
+  if (strlen($n6)==1) { $n6 = "0$n6"; }
+  if (strlen($n7)==1) { $n7 = "0$n7"; }
+  if (strlen($n8)==1) { $n8 = "0$n8"; }
+  if (strlen($n9)==1) { $n9 = "0$n9"; }
+  if (strlen($n10)==1) { $n10 = "0$n10"; }
 
 
 
@@ -366,9 +381,10 @@ if (isset($_POST['reg_apost'])) {
 
   
 
-  $array = array($n1, $n2, $n3, $n4, $n5);
-  sort($array);
-  $numeros = "$array[0], $array[1], $array[2], $array[3], $array[4]";
+    $array = array($n1, $n2, $n3, $n4, $n5, $n6, $n7, $n8, $n9, $n10);
+    sort($array);
+    $numeros = "$array[0], $array[1], $array[2], $array[3], $array[4], $array[5], $array[6], $array[7], $array[8], $array[9]";
+
 
     $query = "INSERT INTO apostas ( numeros, idUser) 
           VALUES( '$numeros','$idUser')";
