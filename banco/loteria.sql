@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/02/2021 às 19:59
--- Versão do servidor: 10.4.11-MariaDB
--- Versão do PHP: 7.4.6
+-- Tempo de geração: 26-Fev-2021 às 17:45
+-- Versão do servidor: 10.4.14-MariaDB
+-- versão do PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `loteria`
+-- Banco de dados: `lotiria`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `apostas`
+-- Estrutura da tabela `apostas`
 --
 
 CREATE TABLE `apostas` (
@@ -35,7 +35,7 @@ CREATE TABLE `apostas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `apostas`
+-- Extraindo dados da tabela `apostas`
 --
 
 INSERT INTO `apostas` (`idapostas`, `numeros`, `idUser`, `idSorteio`) VALUES
@@ -43,12 +43,22 @@ INSERT INTO `apostas` (`idapostas`, `numeros`, `idUser`, `idSorteio`) VALUES
 (12, '01, 03, 04, 05, 08', '4', '24'),
 (13, '01, 03, 05, 11, 20', '4', '24'),
 (14, '07, 21, 34, 67, 80', '1', '24'),
-(15, '01, 02, 03, 04, 05', '1', '25');
+(15, '01, 02, 03, 04, 05', '1', '25'),
+(16, '01, 02, 03, 04, 05', '1', '35'),
+(17, '01, 02, 03, 04, 05', '1', '35'),
+(18, '01, 02, 03, 04, 04', '1', '35'),
+(19, '01, 02, 03, 06, 07', '1', '35'),
+(20, '01, 02, 07, 08, 09', '1', '36'),
+(21, '01, 02, 03, 07, 08', '1', '36'),
+(22, '01, 02, 03, 04, 07', '1', '36'),
+(23, '01, 02, 03, 04, 05', '1', '36'),
+(25, '01, 02, 03, 04, 05', '10', '0'),
+(26, '01, 02, 03, 04, 05', '5', '0');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `sorteio`
+-- Estrutura da tabela `sorteio`
 --
 
 CREATE TABLE `sorteio` (
@@ -60,11 +70,10 @@ CREATE TABLE `sorteio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `sorteio`
+-- Extraindo dados da tabela `sorteio`
 --
 
 INSERT INTO `sorteio` (`idsorteio`, `data`, `numeros`, `nome`, `idCriador`) VALUES
-(4, '16/02/2021', '07/80/11/21/67', 'banana', 1),
 (5, '16/02/2021', '07, 80, 11, 21, 67', 'banana', 1),
 (6, '17/02/2021', '87, 67, 65, 86, 08', 'dsdsd', 4),
 (7, '17/02/2021', '32, 21, 32, 53, 55', 'qwqw', 4),
@@ -80,21 +89,27 @@ INSERT INTO `sorteio` (`idsorteio`, `data`, `numeros`, `nome`, `idCriador`) VALU
 (17, '17/02/2021', '07, 80, 11, 21, 67', '132789', 4),
 (18, '17/02/2021', '07, 80, 34, 45, 67', 'banana', 4),
 (19, '17/02/2021', '07, 23, 34, 45, 56', 'banana', 4),
-(20, '17/02/2021', '07, 80, 11, 21, 67', 'luis', 4),
 (21, '17/02/2021', '01, 04, 06, 71, 80', 'luis', 4),
 (22, '17/02/2021', '01, 02, 50, 60, 70', 'vai la', 4),
 (23, '17/02/2021', '01, 02, 50, 70, 80', 'wwww', 4),
 (24, '17/02/2021', '07, 21, 34, 67, 80', 'hghghg', 1),
 (25, '17/02/2021', '01, 02, 03, 04, 05', 'oioi', 1),
-(26, '18/02/2021', '14, 15, 18, 23, 25', 'Sorteio12', 3),
-(27, '19/02/2021', '12, 15, 25, 35, 50', 'Sorteio3', 3),
-(28, '19/02/2021', '13, 15, 25, 32, 40', 'sorteio4', 3),
-(29, '22/02/2021', '15, 16, 17, 18, 19', 'Sorteio 5', 3);
+(26, '17/02/2021', '01, 07, 21, 34, 70', 'banana', 1),
+(27, '17/02/2021', '07, 21, 23, 34, 67', 'banana', 1),
+(28, '17/02/2021', '01, 07, 21, 23, 34', 'luis', 1),
+(29, '17/02/2021', '07, 11, 21, 67, 80', 'banana', 1),
+(30, '17/02/2021', '01, 02, 03, 04, 05', 'banana', 1),
+(31, '17/02/2021', '01, 02, 03, 04, 05', 'luis', 1),
+(32, '17/02/2021', '01, 02, 03, 04, 05', 'Luis Felipe', 1),
+(33, '17/02/2021', '01, 03, 23, 34, 80', 'luis', 1),
+(34, '17/02/2021', '01, 02, 03, 04, 05', 'luis', 1),
+(35, '19/02/2021', '01, 02, 03, 04, 05', 'banana', 1),
+(36, '19/02/2021', '01, 02, 03, 04, 05', 'banana', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `user`
+-- Estrutura da tabela `user`
 --
 
 CREATE TABLE `user` (
@@ -103,68 +118,72 @@ CREATE TABLE `user` (
   `celular` varchar(45) NOT NULL,
   `senha` varchar(100) NOT NULL,
   `tipo` varchar(45) NOT NULL DEFAULT '0',
-  `idSuperior` int(11) DEFAULT NULL,
-  `nivel` varchar(15) NOT NULL,
-  `data` date NOT NULL
+  `idSuperior` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `user`
+-- Extraindo dados da tabela `user`
 --
 
-INSERT INTO `user` (`iduser`, `name`, `celular`, `senha`, `tipo`, `idSuperior`, `nivel`, `data`) VALUES
-(1, 'maipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1, '', '0000-00-00'),
-(2, 'LuisFelipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1, '', '0000-00-00'),
-(3, 'admin', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 15, '', '0000-00-00'),
-(4, 'maipee', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '1', 0, '', '0000-00-00'),
-(5, 'userT1', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 0, '', '0000-00-00'),
-(7, 'userT3', '19191119199', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 0, '', '0000-00-00'),
-(10, 'siberin', '19999999999', '202cb962ac59075b964b07152d234b70', '2', 0, '', '0000-00-00'),
-(11, 'Maria', '1987263592', '202cb962ac59075b964b07152d234b70', '1', 0, '', '0000-00-00');
+INSERT INTO `user` (`iduser`, `name`, `celular`, `senha`, `tipo`, `idSuperior`) VALUES
+(1, 'maipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1),
+(2, 'LuisFelipe', '19999610009', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1),
+(3, 'admin', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 15),
+(4, 'maipee', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '1', 1),
+(5, 'userT1', '19999999999', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 2),
+(7, 'userT3', '19191119199', 'e7d80ffeefa212b7c5c55700e4f7193e', '0', 1),
+(10, 'luisffff', '19999610005', 'e7d80ffeefa212b7c5c55700e4f7193e', '1', 1),
+(11, 'luisjogador', '89418918198189', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 1),
+(12, 'luisjogador2', '1561516', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 1),
+(15, 'luuu', '2858282828', 'e7d80ffeefa212b7c5c55700e4f7193e', '2', 1),
+(16, 'qwe', '123131', '76d80224611fc919a5d54f0ff9fba446', '2', 1),
+(17, 'qwqw', '12121', '76d80224611fc919a5d54f0ff9fba446', '2', 1),
+(18, 'qweqwe', '12312', 'e110fb45bc4f7cc5d367b06bfbc8e5c3', '2', 1),
+(19, 'qaws', '1212121', '22f75d966798ae7995aae100bcf80142', '2', 1);
 
 --
--- Índices de tabelas apagadas
+-- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `apostas`
+-- Índices para tabela `apostas`
 --
 ALTER TABLE `apostas`
   ADD PRIMARY KEY (`idapostas`);
 
 --
--- Índices de tabela `sorteio`
+-- Índices para tabela `sorteio`
 --
 ALTER TABLE `sorteio`
   ADD PRIMARY KEY (`idsorteio`);
 
 --
--- Índices de tabela `user`
+-- Índices para tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`iduser`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `apostas`
 --
 ALTER TABLE `apostas`
-  MODIFY `idapostas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idapostas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `sorteio`
 --
 ALTER TABLE `sorteio`
-  MODIFY `idsorteio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idsorteio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

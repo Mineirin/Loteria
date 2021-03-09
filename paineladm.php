@@ -70,11 +70,7 @@ echo('<a class="nav-link" href="paineladm.php">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Menu Principal
-      </div>
-
+      
       <!-- Nav Item - Pages Collapse Menu -->
       
         

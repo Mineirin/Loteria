@@ -77,10 +77,6 @@ echo('<a class="nav-link" href="paineladm.php">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Menu Principal
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       
@@ -156,11 +152,9 @@ echo(' <li class="nav-item">
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <form class="form-inline">
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-              <i class="fa fa-bars"></i>
-            </button>
-          </form>
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
 
           <!-- Topbar Search -->
           <ul class="navbar-nav ml-auto">
@@ -195,8 +189,8 @@ echo(' <li class="nav-item">
           <h1 class="h3 mb-2 text-gray-800">Jogadores</h1>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-          <div class="card-header py-3" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; margin-left: 10px;">
-          <h6 class="m-0 font-weight-bold text-primary" style="width: 30%;">Jogadores Cadastrados</h6>
+          <div class="card-header py-3" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; margin-left: 0px;">
+          <h6 class="m-0 font-weight-bold text-primary" style="width: 45%;">Jogadores Cadastrados</h6>
              <div class="col-lg-2 col-md-9 col-sm-12">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo"> <i class="fas fa-user-plus"> USUÁRIOS </i> </button>
               </div>
@@ -212,14 +206,7 @@ echo(' <li class="nav-item">
                       <th>Cadastrado</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Nome</th>
-                      <th>Celular</th>
-                      <th>Ação</th>
-                      <th>Cadastrado</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                   <?php 
                   $cont =0;
@@ -282,10 +269,10 @@ echo(' <li class="nav-item">
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2021</span>
           </div>
         </div>
       </footer>

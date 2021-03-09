@@ -69,10 +69,7 @@ echo('<a class="nav-link" href="paineladm.php">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Menu Principal
-      </div>
+      
 
       <!-- Nav Item - Pages Collapse Menu -->
       
@@ -282,7 +279,7 @@ echo(' <li class="nav-item">
       <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Mineirando-Software 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2021</span>
           </div>
         </div>
       </footer>
