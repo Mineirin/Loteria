@@ -217,14 +217,7 @@ echo(' <li class="nav-item">
                       <th>Celular</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>Colocação</th>
-                      <th>id</th>
-                      <th>Números</th>
-                      <th>Celular</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                   <?php 
                   $cont =0;
@@ -443,13 +436,7 @@ echo(' <li class="nav-item">
                       <th>Celular</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>id</th>
-                      <th>Números</th>
-                      <th>Celular</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                   <?php 
                   $cont =0;
@@ -495,7 +482,7 @@ echo(' <li class="nav-item">
       <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Mineirando-Software 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2021</span>
           </div>
         </div>
       </footer>

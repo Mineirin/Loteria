@@ -106,10 +106,6 @@ echo('<a class="nav-link" href="index.php">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Menu Principal
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       
@@ -254,10 +250,8 @@ echo(' <li class="nav-item">
           <div class="card-footer text-center no-print">
           
             <div class="salvar">
-          
-              <i class="fas fa-check icon"></i>
             
-              <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar Sorteio" name="reg_sort"/>
+              <input class="btn btn-primary btn-icon-split btn-lg mt-3 mb-3 btsalvar" type="submit" form="reg_sort" value="Salvar" name="reg_sort"/>
             </div>
           </div>
         </div>
@@ -347,14 +341,7 @@ echo(' <li class="nav-item">
                       <th>Celular</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>Colocação</th>
-                      <th>Nome</th>
-                      <th>Numeros</th>
-                      <th>Celular</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
                   <?php 
                   if (isset($_GET['idSort'])) {
@@ -583,7 +570,7 @@ echo(' <li class="nav-item">
       <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Mineirando-Software 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2021</span>
           </div>
         </div>
       </footer>

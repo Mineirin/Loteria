@@ -74,10 +74,6 @@ echo('<a class="nav-link" href="paineladm.php">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Menu Principal
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       
@@ -135,10 +131,10 @@ echo(' <li class="nav-item">
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
+       <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
     </ul>
     <!-- End of Sidebar -->
@@ -153,11 +149,9 @@ echo(' <li class="nav-item">
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <form class="form-inline">
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-              <i class="fa fa-bars"></i>
-            </button>
-          </form>
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
 
           <!-- Topbar Search -->
           <ul class="navbar-nav ml-auto">
@@ -209,15 +203,6 @@ echo(' <li class="nav-item">
                       <th>Ação</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>id</th>
-                      <th>Nome</th>
-                      <th>Números</th>
-                      <th>Data</th>
-                      <th>Ação</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
                   <?php 
                   $cont =0;
@@ -263,12 +248,11 @@ echo(' <li class="nav-item">
       <footer class="sticky-footer bg-white no-print">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Mineirando-Software 2020</span>
+            <span>Copyright &copy; Mineirando-Software 2021</span>
           </div>
         </div>
       </footer>
       <!-- End of Footer -->
-
     </div>
     <!-- End of Content Wrapper -->
 

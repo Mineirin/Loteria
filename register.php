@@ -69,9 +69,7 @@
     </div>
 
   </div>
-  <div class="d-flex justify-content-center">
-    <a href="https://br.freepik.com/vetores/dinheiro">Business vetor created by freepik - www.freepik.com</a>
-  </div>
+  
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
