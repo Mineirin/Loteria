@@ -1,71 +1,66 @@
-.teeetee{
-    margin: 10px !important;
+.teeetee {
+  margin: 10px !important;
 }
 
 #form {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 25px auto 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 25px auto 0;
 }
-    input.teste {
-      margin: 0 5px;
-      text-align: center;
-      line-height: 80px;
-      font-size: 50px;
-      border: solid 1px #ccc;
-      box-shadow: 0 0 5px #ccc inset;
-      outline: none;
-      width: 20%;
-      transition: all .2s ease-in-out;
-      border-radius: 3px;
-      max-width: 50px;
-      font-size: 30px;
-      
-      
-    }
-
-    input.teste:focus{
-        border-color: #3822ff;
-        box-shadow: 0 0 5px #3822ff inset;
-    }
-
-    input.teste:focus{
-        background: transparent;
-    }
-
-.salvar{
-    position: relative;
-    width: auto;
+input.teste {
+  margin: 0 5px;
+  text-align: center;
+  line-height: 80px;
+  font-size: 50px;
+  border: solid 1px #ccc;
+  box-shadow: 0 0 5px #ccc inset;
+  outline: none;
+  width: 20%;
+  transition: all 0.2s ease-in-out;
+  border-radius: 3px;
+  max-width: 50px;
+  font-size: 30px;
 }
 
-.icon{
-    position: absolute;
-    top: 30px;
+input.teste:focus {
+  border-color: #3822ff;
+  box-shadow: 0 0 5px #3822ff inset;
+}
+
+input.teste:focus {
+  background: transparent;
+}
+
+.salvar {
+  position: relative;
+  width: auto;
+}
+
+.icon {
+  position: absolute;
+  top: 30px;
+  color: white;
+  /* right: -15px; */
+  left: 38%;
+  transition: right 0.2s;
+}
+
+.btsalvar {
+  width: 40%;
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 836px) {
+  .ola {
+    margin-right: 10px;
+    background-color: blue;
+    border: solid;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 30px;
+    align-self: center;
     color: white;
-    /* right: -15px; */
-    left: 38%;
-    transition: right 0.2s;
-}
-
-.btsalvar{
-    width: 30%;
-    padding: .5rem 1rem;
-    padding-left: 40px;
-}
-
-
-@media(max-width:836px){
-
-    .ola{
-        margin-right: 10px;
-        background-color: blue;
-        border: solid;
-        border-radius: 50%;
-        padding: 5px;
-        font-size: 30px;
-        align-self: center;
-        color: white;
-    }
+  }
 }
