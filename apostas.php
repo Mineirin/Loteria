@@ -1,5 +1,5 @@
 <?php 
- include('php/server.php') ;
+include('php/server.php') ;
 
   if (!isset($_SESSION['username'])) {
   	$_SESSION['msg'] = "You must log in first";
@@ -10,7 +10,9 @@
   	unset($_SESSION['username']);
   	header("location: login.php");
   }
- //$today = date("j/n/Y");
+
+  $sort_check_query = 'SELECT * FROM apostas ';
+  $result = mysqli_query($db,$sort_check_query);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,14 +27,15 @@
 
   <title>Sorteio Magnata</title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/print.css">
-  <link rel="stylesheet" href="css/cards-admin.css">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -71,7 +74,7 @@ echo('<a class="nav-link" href="paineladm.php">
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-     
+
       <!-- Nav Item - Pages Collapse Menu -->
       
         
@@ -133,10 +136,10 @@ echo(' <li class="nav-item">
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
+       <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
     </ul>
     <!-- End of Sidebar -->
@@ -156,38 +159,26 @@ echo(' <li class="nav-item">
           </button>
 
           <!-- Topbar Search -->
-          
-
-          <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            
-
-            <!-- Nav Item - Alerts -->
-            
-
-            <!-- Nav Item - Messages -->
-            
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username']; ?></span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Sair
+  
+              <div class="topbar-divider d-none d-sm-block"></div>
+  
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username']; ?></span>
+                  <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                 </a>
-              </div>
-            </li>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                  
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Sair
+                  </a>
+                </div>
+              </li>
 
           </ul>
 
@@ -195,9 +186,76 @@ echo(' <li class="nav-item">
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <?php
-          include_once('home.php');
-        ?>
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Apostas</h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Apostas Realizados</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>Usuario</th>
+                      <th>Números</th>
+                      <th>Data</th>
+                      <th>Cambista</th>
+                      <th>Sorteio</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php 
+                  $cont =0;
+                   while($row = $result->fetch_assoc()) {
+                    $user_check_query = 'SELECT * FROM user WHERE iduser='.$row['idCambista'].'  LIMIT 1';
+                    //echo($user_check_query );
+                  $result1 = mysqli_query($db, $user_check_query);
+                  $user = mysqli_fetch_assoc($result1);
+                  $camb =  $user['name'];
+
+                  $user_check_query = 'SELECT * FROM user WHERE iduser='.$row['idUser'].'  LIMIT 1';
+                    //echo($user_check_query );
+                  $result2 = mysqli_query($db, $user_check_query);
+                  $user = mysqli_fetch_assoc($result2);
+                  $nuser =  $user['name'];
+
+                  $sortio="";
+                  if($row['idSorteio']=="0"){
+                      $sortio="Sorteio atual";
+                  }else{
+                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='.$row['idSorteio'].'  LIMIT 1';
+                    //echo($user_check_query );
+                  $result2 = mysqli_query($db, $user_check_query);
+                  $user = mysqli_fetch_assoc($result2);
+                  $sortio =  $user['nome'];
+                  }
+
+                    echo("<tr>
+                    <td>".$row['idapostas']."</td>
+                    <td>".$nuser."</td>
+                    <td>".$row['numeros']."</td>
+                    <td>".$row['data']."</td>
+                    <td>".$camb."</td>
+                    <td>".$sortio."</td>
+                  </tr>");
+                    
+                    $cont +=1;
+                   }
+                  
+                  ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -212,7 +270,6 @@ echo(' <li class="nav-item">
         </div>
       </footer>
       <!-- End of Footer -->
-
     </div>
     <!-- End of Content Wrapper -->
 
@@ -238,7 +295,6 @@ echo(' <li class="nav-item">
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a href="index.php?logout='1'" class="btn btn-primary">Sair</a>
-          
         </div>
       </div>
     </div>
@@ -255,11 +311,11 @@ echo(' <li class="nav-item">
   <script src="js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 

@@ -384,10 +384,19 @@ if (isset($_POST['reg_apost'])) {
     $array = array($n1, $n2, $n3, $n4, $n5, $n6, $n7, $n8, $n9, $n10);
     sort($array);
     $numeros = "$array[0], $array[1], $array[2], $array[3], $array[4], $array[5], $array[6], $array[7], $array[8], $array[9]";
+  
+    $user_check_query = 'SELECT iduser FROM user WHERE name="'. $_SESSION['username'].'"  LIMIT 1';
+
+    $result1 = mysqli_query($db, $user_check_query);
+    $user = mysqli_fetch_assoc($result1);
+    $idCambista =  $user['iduser'];
 
 
-    $query = "INSERT INTO apostas ( numeros, idUser) 
-          VALUES( '$numeros','$idUser')";
+  
+    $data = date("d/m/Y");
+
+    $query = "INSERT INTO apostas ( numeros, idUser, data, idCambista) 
+          VALUES( '$numeros','$idUser','$data','$idCambista')";
     mysqli_query($db, $query);
 
 

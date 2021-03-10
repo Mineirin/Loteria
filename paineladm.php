@@ -120,6 +120,11 @@ echo(' <li class="nav-item">
           <i class="fas fa-fw fa-cubes"></i>
           <span>Sorteios</span></a>
       </li>
+<li class="nav-item">
+        <a class="nav-link" href="apostas.php">
+          <i class="fas fa-fw fa-cubes"></i>
+          <span>Apostas</span></a>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
