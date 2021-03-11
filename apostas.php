@@ -1,18 +1,18 @@
-<?php 
-include('php/server.php') ;
+<?php
+include('php/server.php');
 
-  if (!isset($_SESSION['username'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: login.php');
-  }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['username']);
-  	header("location: login.php");
-  }
+if (!isset($_SESSION['username'])) {
+  $_SESSION['msg'] = "You must log in first";
+  header('location: login.php');
+}
+if (isset($_GET['logout'])) {
+  session_destroy();
+  unset($_SESSION['username']);
+  header("location: login.php");
+}
 
-  $sort_check_query = 'SELECT * FROM apostas ';
-  $result = mysqli_query($db,$sort_check_query);
+$sort_check_query = 'SELECT * FROM apostas ';
+$result = mysqli_query($db, $sort_check_query);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,6 +36,10 @@ include('php/server.php') ;
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css">
+  <link rel="stylesheet" href="css/stylesorteio.css">
 
 </head>
 
@@ -50,25 +54,25 @@ include('php/server.php') ;
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="col">
-          <i class="fab fa-monero fa-3x"></i>
+          <i class="fab fa-monero fa-3x no-print"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Sorteio Magnata</div>
+        <div class="sidebar-brand-text mx-3 no-print">Sorteio Magnata</div>
       </a>
 
       <!-- Divider -->
-      <hr class="sidebar-divider my-0">
+      <hr class="sidebar-divider my-0 no-print">
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-      <?php
-      if($_SESSION['tipo']=="0"){
-echo('<a class="nav-link" href="paineladm.php">
-<i class="fas fa-fw fa-tachometer-alt"></i>
-<span>Painel Administrador</span></a>');
-      }
-      
-      ?>
-        
+        <?php
+        if ($_SESSION['tipo'] == "0") {
+          echo ('<a class="nav-link" href="paineladm.php">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Painel Administrador</span></a>');
+        }
+
+        ?>
+
       </li>
 
       <!-- Divider -->
@@ -76,42 +80,43 @@ echo('<a class="nav-link" href="paineladm.php">
 
 
       <!-- Nav Item - Pages Collapse Menu -->
-      
-        
 
-        <?php
-      if($_SESSION['tipo']=="0"|| $_SESSION['tipo']=="1"){
-echo('<li class="nav-item">
-<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-  <i class="fas fa-fw fa-user"></i>
-  <span>Usuários</span>
-</a>
-<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-<div class="bg-white py-2 collapse-inner rounded">
-  <h6 class="collapse-header">Painel de Usuários:</h6>');
-  if($_SESSION['tipo']=="0"){
-  echo(' <a class="collapse-item" href="cambistas.php">Cambistas</a>');}
-  echo('<a class="collapse-item" href="jogadores.php">Jogadores</a>
-</div>
-</div></li>');
-      }
-      
-      ?>
-      
-
-       <!-- Nav Item - Charts -->
-      
 
 
       <?php
-      if($_SESSION['tipo']=="0"){
-echo(' <li class="nav-item">
-<a class="nav-link" href="novosorteio.php">
-  <i class="fas fa-fw fa-cube"></i>
-  <span>Novo Sorteio</span></a>
-</li>');
+      if ($_SESSION['tipo'] == "0" || $_SESSION['tipo'] == "1") {
+                  echo ('<li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Usuários</span>
+          </a>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Painel de Usuários:</h6>');
+                  if ($_SESSION['tipo'] == "0") {
+                    echo (' <a class="collapse-item" href="cambistas.php">Cambistas</a>');
+                  }
+                  echo ('<a class="collapse-item" href="jogadores.php">Jogadores</a>
+          </div>
+          </div></li>');
+                }
+
+      ?>
+
+
+      <!-- Nav Item - Charts -->
+
+
+
+      <?php
+      if ($_SESSION['tipo'] == "0") {
+                echo (' <li class="nav-item">
+        <a class="nav-link" href="novosorteio.php">
+          <i class="fas fa-fw fa-cube"></i>
+          <span>Novo Sorteio</span></a>
+        </li>');
       }
-      
+
       ?>
       <li class="nav-item">
         <a class="nav-link" href="novaaposta.php">
@@ -124,7 +129,7 @@ echo(' <li class="nav-item">
           <i class="fas fa-fw fa-cubes"></i>
           <span>Sorteios</span></a>
       </li>
-<li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" href="apostas.php">
           <i class="fas fa-fw fa-cubes"></i>
           <span>Apostas</span></a>
@@ -136,10 +141,10 @@ echo(' <li class="nav-item">
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
-       <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-      <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline no-print">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
 
     </ul>
     <!-- End of Sidebar -->
@@ -160,25 +165,25 @@ echo(' <li class="nav-item">
 
           <!-- Topbar Search -->
           <ul class="navbar-nav ml-auto">
-  
-              <div class="topbar-divider d-none d-sm-block"></div>
-  
-              <!-- Nav Item - User Information -->
-              <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username']; ?></span>
-                  <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username']; ?></span>
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Sair
                 </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                  
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Sair
-                  </a>
-                </div>
-              </li>
+              </div>
+            </li>
 
           </ul>
 
@@ -197,6 +202,10 @@ echo(' <li class="nav-item">
               <h6 class="m-0 font-weight-bold text-primary">Apostas Realizados</h6>
             </div>
             <div class="card-body">
+              <div class="d-sm-flex align-items-center justify-content-between mb-4 no-print">
+                <h1 class="h3 mb-0 text-gray-800"> </h1>
+                <button onclick="window.print()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm no-print" style="margin-right:15px;"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</button>
+              </div>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -210,45 +219,45 @@ echo(' <li class="nav-item">
                     </tr>
                   </thead>
                   <tbody>
-                  <?php 
-                  $cont =0;
-                   while($row = $result->fetch_assoc()) {
-                    $user_check_query = 'SELECT * FROM user WHERE iduser='.$row['idCambista'].'  LIMIT 1';
-                    //echo($user_check_query );
-                  $result1 = mysqli_query($db, $user_check_query);
-                  $user = mysqli_fetch_assoc($result1);
-                  $camb =  $user['name'];
+                    <?php
+                    $cont = 0;
+                    while ($row = $result->fetch_assoc()) {
+                      $user_check_query = 'SELECT * FROM user WHERE iduser=' . $row['idCambista'] . '  LIMIT 1';
+                      //echo($user_check_query );
+                      $result1 = mysqli_query($db, $user_check_query);
+                      $user = mysqli_fetch_assoc($result1);
+                      $camb =  $user['name'];
 
-                  $user_check_query = 'SELECT * FROM user WHERE iduser='.$row['idUser'].'  LIMIT 1';
-                    //echo($user_check_query );
-                  $result2 = mysqli_query($db, $user_check_query);
-                  $user = mysqli_fetch_assoc($result2);
-                  $nuser =  $user['name'];
+                      $user_check_query = 'SELECT * FROM user WHERE iduser=' . $row['idUser'] . '  LIMIT 1';
+                      //echo($user_check_query );
+                      $result2 = mysqli_query($db, $user_check_query);
+                      $user = mysqli_fetch_assoc($result2);
+                      $nuser =  $user['name'];
 
-                  $sortio="";
-                  if($row['idSorteio']=="0"){
-                      $sortio="Sorteio atual";
-                  }else{
-                    $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio='.$row['idSorteio'].'  LIMIT 1';
-                    //echo($user_check_query );
-                  $result2 = mysqli_query($db, $user_check_query);
-                  $user = mysqli_fetch_assoc($result2);
-                  $sortio =  $user['nome'];
-                  }
+                      $sortio = "";
+                      if ($row['idSorteio'] == "0") {
+                        $sortio = "Sorteio atual";
+                      } else {
+                        $user_check_query = 'SELECT * FROM sorteio WHERE idsorteio=' . $row['idSorteio'] . '  LIMIT 1';
+                        //echo($user_check_query );
+                        $result2 = mysqli_query($db, $user_check_query);
+                        $user = mysqli_fetch_assoc($result2);
+                        $sortio =  $user['nome'];
+                      }
 
-                    echo("<tr>
-                    <td>".$row['idapostas']."</td>
-                    <td>".$nuser."</td>
-                    <td>".$row['numeros']."</td>
-                    <td>".$row['data']."</td>
-                    <td>".$camb."</td>
-                    <td>".$sortio."</td>
+                      echo ("<tr>
+                    <td>" . $row['idapostas'] . "</td>
+                    <td>" . $nuser . "</td>
+                    <td>" . $row['numeros'] . "</td>
+                    <td>" . $row['data'] . "</td>
+                    <td>" . $camb . "</td>
+                    <td>" . $sortio . "</td>
                   </tr>");
-                    
-                    $cont +=1;
-                   }
-                  
-                  ?>
+
+                      $cont += 1;
+                    }
+
+                    ?>
                   </tbody>
                 </table>
               </div>
